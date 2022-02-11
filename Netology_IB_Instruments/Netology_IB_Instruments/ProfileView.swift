@@ -30,7 +30,6 @@ class ProfileView: UIView {
         view.frame = self.bounds
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.addSubview(view)
-//        self.nameLabel.text = "Kirill"
     }
     
     private func loadViewFromXib() -> UIView {
