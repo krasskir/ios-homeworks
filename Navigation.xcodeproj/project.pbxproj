@@ -11,6 +11,9 @@
 		4DBB482727B5165900B4E989 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBB482627B5165900B4E989 /* SceneDelegate.swift */; };
 		4DBB482E27B5165B00B4E989 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DBB482D27B5165B00B4E989 /* Assets.xcassets */; };
 		4DBB483127B5165B00B4E989 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DBB482F27B5165B00B4E989 /* LaunchScreen.storyboard */; };
+		4DD8774C27B79AC8000031F4 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8774B27B79AC8000031F4 /* Post.swift */; };
+		4DD8774E27B7AC3E000031F4 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8774D27B7AC3E000031F4 /* InfoViewController.swift */; };
+		4DD8775227B7B0A7000031F4 /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8775127B7B0A7000031F4 /* AlertController.swift */; };
 		4DDD35BC27B699F500A5C29B /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD35BB27B699F500A5C29B /* FeedViewController.swift */; };
 		4DDD35C027B69A5400A5C29B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD35BF27B69A5400A5C29B /* ProfileViewController.swift */; };
 		4DDD35C227B69A6800A5C29B /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD35C127B69A6800A5C29B /* PostViewController.swift */; };
@@ -23,6 +26,9 @@
 		4DBB482D27B5165B00B4E989 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4DBB483027B5165B00B4E989 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4DBB483227B5165B00B4E989 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4DD8774B27B79AC8000031F4 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		4DD8774D27B7AC3E000031F4 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		4DD8775127B7B0A7000031F4 /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		4DDD35BB27B699F500A5C29B /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		4DDD35BF27B69A5400A5C29B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		4DDD35C127B69A6800A5C29B /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +66,7 @@
 			children = (
 				4DDD35BD27B69A0F00A5C29B /* Delegate */,
 				4DDD35C327B69A6D00A5C29B /* ViewCtrl */,
+				4DD8774B27B79AC8000031F4 /* Post.swift */,
 				4DBB482D27B5165B00B4E989 /* Assets.xcassets */,
 				4DBB482F27B5165B00B4E989 /* LaunchScreen.storyboard */,
 				4DBB483227B5165B00B4E989 /* Info.plist */,
@@ -82,6 +89,8 @@
 				4DDD35BB27B699F500A5C29B /* FeedViewController.swift */,
 				4DDD35BF27B69A5400A5C29B /* ProfileViewController.swift */,
 				4DDD35C127B69A6800A5C29B /* PostViewController.swift */,
+				4DD8774D27B7AC3E000031F4 /* InfoViewController.swift */,
+				4DD8775127B7B0A7000031F4 /* AlertController.swift */,
 			);
 			path = ViewCtrl;
 			sourceTree = "<group>";
@@ -159,6 +168,9 @@
 				4DDD35C227B69A6800A5C29B /* PostViewController.swift in Sources */,
 				4DBB482527B5165900B4E989 /* AppDelegate.swift in Sources */,
 				4DDD35C027B69A5400A5C29B /* ProfileViewController.swift in Sources */,
+				4DD8774E27B7AC3E000031F4 /* InfoViewController.swift in Sources */,
+				4DD8775227B7B0A7000031F4 /* AlertController.swift in Sources */,
+				4DD8774C27B79AC8000031F4 /* Post.swift in Sources */,
 				4DDD35BC27B699F500A5C29B /* FeedViewController.swift in Sources */,
 				4DBB482727B5165900B4E989 /* SceneDelegate.swift in Sources */,
 			);

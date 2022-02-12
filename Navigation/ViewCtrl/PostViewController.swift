@@ -12,11 +12,16 @@ class PostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = .yellow
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "info.circle"), style: .plain, target: self, action: #selector(didTapBarButton))
+        
+        self.view.backgroundColor = .white
         self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.navigationItem.title = "Мой пост"
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemBlue]
         self.navigationItem.backButtonTitle = "Назад"
     }
 
+    @objc private func didTapBarButton() {
+        let infoView = InfoViewController()
+        self.present(infoView, animated: true, completion: nil)
+    }
 }
