@@ -20,21 +20,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         
         /// 3. Create a view hierarchy programmatically
-        let feedViewController = FeedViewController()
-        let profileViewController = ProfileViewController()
-        
-        let profileNavigation = UINavigationController(rootViewController: profileViewController)
-        let feedNavigation = UINavigationController(rootViewController: feedViewController)
-        
-        feedNavigation.tabBarItem = UITabBarItem(title: "Лента", image: UIImage(systemName: "house", withConfiguration: UIImage.SymbolConfiguration(weight: .heavy)), tag: 0)
-        profileNavigation.tabBarItem = UITabBarItem(title: "Профиль", image: UIImage(systemName: "person.crop.circle", withConfiguration: UIImage.SymbolConfiguration(weight: .heavy)), tag: 1)
-        
-        let tabBarController = UITabBarController()
-        
-        tabBarController.setViewControllers([feedNavigation, profileNavigation], animated: false)
-        
+//        let feedViewController = FeedViewController()
+//        let profileViewController = ProfileViewController()
+//
+//        let profileNavigation = UINavigationController(rootViewController: profileViewController)
+//        let feedNavigation = UINavigationController(rootViewController: feedViewController)
+//
+//        feedNavigation.tabBarItem = UITabBarItem(title: "Лента", image: UIImage(systemName: "house", withConfiguration: UIImage.SymbolConfiguration(weight: .heavy)), tag: 0)
+//        profileNavigation.tabBarItem = UITabBarItem(title: "Профиль", image: UIImage(systemName: "person.crop.circle", withConfiguration: UIImage.SymbolConfiguration(weight: .heavy)), tag: 1)
+//
+//        let tabBarController = UITabBarController()
+//
+//        tabBarController.setViewControllers([feedNavigation, profileNavigation], animated: false)
+//
         /// 4. Set the root view controller of the window with your view controller
-        window.rootViewController = tabBarController
+//        window.rootViewController = tabBarController
+        window.rootViewController = TabBarController()
         
         /// 5. Set the window and call makeKeyAndVisible()
         self.window = window

@@ -14,6 +14,7 @@
 		4DD8774C27B79AC8000031F4 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8774B27B79AC8000031F4 /* Post.swift */; };
 		4DD8774E27B7AC3E000031F4 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8774D27B7AC3E000031F4 /* InfoViewController.swift */; };
 		4DD8775227B7B0A7000031F4 /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8775127B7B0A7000031F4 /* AlertController.swift */; };
+		4DD8775427B7CEC3000031F4 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8775327B7CEC3000031F4 /* TabBarController.swift */; };
 		4DDD35BC27B699F500A5C29B /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD35BB27B699F500A5C29B /* FeedViewController.swift */; };
 		4DDD35C027B69A5400A5C29B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD35BF27B69A5400A5C29B /* ProfileViewController.swift */; };
 		4DDD35C227B69A6800A5C29B /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD35C127B69A6800A5C29B /* PostViewController.swift */; };
@@ -29,6 +30,7 @@
 		4DD8774B27B79AC8000031F4 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		4DD8774D27B7AC3E000031F4 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		4DD8775127B7B0A7000031F4 /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
+		4DD8775327B7CEC3000031F4 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		4DDD35BB27B699F500A5C29B /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		4DDD35BF27B69A5400A5C29B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		4DDD35C127B69A6800A5C29B /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 		4DDD35C327B69A6D00A5C29B /* ViewCtrl */ = {
 			isa = PBXGroup;
 			children = (
+				4DD8775327B7CEC3000031F4 /* TabBarController.swift */,
 				4DDD35BB27B699F500A5C29B /* FeedViewController.swift */,
 				4DDD35BF27B69A5400A5C29B /* ProfileViewController.swift */,
 				4DDD35C127B69A6800A5C29B /* PostViewController.swift */,
@@ -168,6 +171,7 @@
 				4DDD35C227B69A6800A5C29B /* PostViewController.swift in Sources */,
 				4DBB482527B5165900B4E989 /* AppDelegate.swift in Sources */,
 				4DDD35C027B69A5400A5C29B /* ProfileViewController.swift in Sources */,
+				4DD8775427B7CEC3000031F4 /* TabBarController.swift in Sources */,
 				4DD8774E27B7AC3E000031F4 /* InfoViewController.swift in Sources */,
 				4DD8775227B7B0A7000031F4 /* AlertController.swift in Sources */,
 				4DD8774C27B79AC8000031F4 /* Post.swift in Sources */,
