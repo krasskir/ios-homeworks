@@ -5,12 +5,8 @@
 //  Created by Kirill Krasavin on 12.02.2022.
 //
 
-import Foundation
+import UIKit
 
-protocol Posts {
-    var title: String { get }
-}
-
-struct Post: Posts {
+struct Post {
     let title: String
 }
