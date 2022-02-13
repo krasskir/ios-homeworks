@@ -17,7 +17,6 @@ class PostViewController: UIViewController {
         self.view.backgroundColor = .white
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemBlue]
-        self.navigationItem.backButtonTitle = "Назад"
     }
 
     @objc private func didTapBarButton() {

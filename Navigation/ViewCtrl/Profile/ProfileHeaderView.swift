@@ -31,12 +31,6 @@ class ProfileHeaderView: UIView {
         self.addSubview(self.nameLable)
         self.addSubview(self.statusLable)
         self.addSubview(self.statusText)
-        
-        self.setConstraintsButton()
-        self.setConstraintsPhote()
-        self.setConstraintsNameLable()
-        self.setConstraintsStatusLable()
-        self.setConstraintsStatusText()
     }
     
     private lazy var photo: UIImageView = {
@@ -138,6 +132,14 @@ class ProfileHeaderView: UIView {
         self.statusText.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
         self.statusText.leftAnchor.constraint(equalTo: photo.rightAnchor, constant: 16).isActive = true
         self.statusText.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    }
+    
+    func constraintsSet() {
+        self.setConstraintsButton()
+        self.setConstraintsPhote()
+        self.setConstraintsNameLable()
+        self.setConstraintsStatusLable()
+        self.setConstraintsStatusText()
     }
     
     @objc private func didTapButton(sender: UIButton) {

@@ -17,16 +17,15 @@ class ProfileViewController: UIViewController {
         self.view.addSubview(self.profileHeaderView)
         
         self.view.backgroundColor = .white
-        
-        self.view.backgroundColor = .white
-        self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.title = "Профиль"
-        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemBlue]
         self.navigationItem.backButtonTitle = "Назад"
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemBlue]
         
     }
     
     override func viewWillLayoutSubviews() {
         profileHeaderView.frame = self.view.safeAreaLayoutGuide.layoutFrame
+        profileHeaderView.constraintsSet()
     }
 }
