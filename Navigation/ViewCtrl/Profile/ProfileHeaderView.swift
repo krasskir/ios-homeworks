@@ -9,7 +9,8 @@ import UIKit
 
 class ProfileHeaderView: UIView {
     
-    let imageHeight: CGFloat = 100
+    private let imageHeight: CGFloat = 100
+    private var currentStatus: String = ""
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,18 +22,21 @@ class ProfileHeaderView: UIView {
     }
     
     func setupView() {
-        self.backgroundColor = .lightGray
+        self.backgroundColor = .white
         self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.gray.cgColor
+        self.layer.borderColor = UIColor.lightGray.cgColor
         
         self.addSubview(self.button)
         self.addSubview(self.photo)
         self.addSubview(self.nameLable)
         self.addSubview(self.statusLable)
+        self.addSubview(self.statusText)
+        
         self.setConstraintsButton()
         self.setConstraintsPhote()
         self.setConstraintsNameLable()
         self.setConstraintsStatusLable()
+        self.setConstraintsStatusText()
     }
     
     private lazy var photo: UIImageView = {
@@ -43,7 +47,7 @@ class ProfileHeaderView: UIView {
         viewPhoto.clipsToBounds = true
         viewPhoto.frame.size = CGSize(width: imageHeight, height: imageHeight)
         viewPhoto.layer.cornerRadius = viewPhoto.frame.size.width / 2
-        viewPhoto.layer.borderColor = UIColor.white.cgColor
+        viewPhoto.layer.borderColor = UIColor.black.cgColor
         viewPhoto.layer.borderWidth = 3.0
         return viewPhoto
     }()
@@ -51,7 +55,7 @@ class ProfileHeaderView: UIView {
     private lazy var button: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Показать статус", for: .normal)
+        button.setTitle("Установить статус", for: .normal)
         button.backgroundColor = .systemBlue
         button.setTitleColor(.white, for: .normal)
         button.clipsToBounds = true
@@ -77,7 +81,7 @@ class ProfileHeaderView: UIView {
     
     private lazy var statusLable: UILabel = {
         let lable = UILabel()
-        lable.text = "Какой же я милый..."
+        lable.text = ""
         lable.translatesAutoresizingMaskIntoConstraints = false
         lable.clipsToBounds = true
         lable.textColor = .gray
@@ -85,33 +89,75 @@ class ProfileHeaderView: UIView {
         return lable
     }()
     
-    func setConstraintsPhote() {
+    private lazy var statusText: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.clipsToBounds = true
+        textField.textColor = .black
+        textField.font = UIFont.systemFont(ofSize: 15.0, weight: .regular)
+        textField.layer.borderColor = UIColor.black.cgColor
+        textField.layer.borderWidth = 1.0
+        textField.layer.cornerRadius = 12.0
+        textField.backgroundColor = .white
+        textField.placeholder = "Введите свой статус"
+        textField.clearButtonMode = UITextField.ViewMode.whileEditing
+        textField.keyboardType = UIKeyboardType.default
+        textField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
+        textField.textAlignment = .center
+        textField.returnKeyType = UIReturnKeyType.done
+        textField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
+        return textField
+    }()
+    
+    private func setConstraintsPhote() {
         self.photo.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
-        self.photo.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
+        self.photo.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16).isActive = true
         self.photo.heightAnchor.constraint(equalToConstant: imageHeight).isActive = true
         self.photo.widthAnchor.constraint(equalToConstant: imageHeight).isActive = true
     }
     
-    func setConstraintsButton() {
-        self.button.topAnchor.constraint(equalTo: photo.bottomAnchor, constant: 16).isActive = true
-        self.button.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
-        self.button.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16).isActive = true
+    private func setConstraintsButton() {
+        self.button.topAnchor.constraint(equalTo: photo.bottomAnchor, constant: 50).isActive = true
+        self.button.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16).isActive = true
+        self.button.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
         self.button.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
-    func setConstraintsNameLable() {
+    private func setConstraintsNameLable() {
         self.nameLable.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 27).isActive = true
         self.nameLable.leftAnchor.constraint(equalTo: photo.rightAnchor, constant: 16).isActive = true
     }
     
-    func setConstraintsStatusLable() {
-        self.statusLable.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -34).isActive = true
+    private func setConstraintsStatusLable() {
+        self.statusLable.bottomAnchor.constraint(equalTo: statusText.topAnchor, constant: -10).isActive = true
         self.statusLable.leftAnchor.constraint(equalTo: photo.rightAnchor, constant: 16).isActive = true
     }
     
-    @objc private func didTapButton() {
-        if let status = statusLable.text {
-            print("\(status)")
+    private func setConstraintsStatusText() {
+        self.statusText.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -16).isActive = true
+        self.statusText.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
+        self.statusText.leftAnchor.constraint(equalTo: photo.rightAnchor, constant: 16).isActive = true
+        self.statusText.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    }
+    
+    @objc private func didTapButton(sender: UIButton) {
+        statusLable.text = currentStatus
+        animateView(sender)
+    }
+    
+    @objc private func statusTextChanged(_ textField: UITextField) {
+        if let text = textField.text, textField.text != currentStatus {
+            currentStatus = text
+        }
+    }
+
+    private func animateView(_ viewToAnimate: UIView) {
+        UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
+            viewToAnimate.transform =  CGAffineTransform(scaleX: 0.92, y: 0.92)
+        }) { (_) in
+            UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 2, options: .curveEaseIn, animations: {
+                viewToAnimate.transform =  CGAffineTransform(scaleX: 1.0, y: 1.0)
+            }, completion: nil)
         }
     }
 }
