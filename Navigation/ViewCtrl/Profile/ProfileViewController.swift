@@ -14,6 +14,8 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.hideKeyboardWhenTappedAround()
+        
         self.view.addSubview(self.profileHeaderView)
         
         self.view.backgroundColor = .white
@@ -29,3 +31,7 @@ class ProfileViewController: UIViewController {
         profileHeaderView.constraintsSet()
     }
 }
+
+
+
+

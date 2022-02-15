@@ -7,10 +7,11 @@
 
 import UIKit
 
-class ProfileHeaderView: UIView {
+class ProfileHeaderView: UIView, UITextFieldDelegate {
     
     private let imageHeight: CGFloat = 100
-    private var currentStatus: String = ""
+    private var currentStatus: String?
+    private let statusLength = 32
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,6 +26,8 @@ class ProfileHeaderView: UIView {
         self.backgroundColor = .white
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.lightGray.cgColor
+        
+        self.statusText.delegate = self
         
         self.addSubview(self.button)
         self.addSubview(self.photo)
@@ -49,7 +52,7 @@ class ProfileHeaderView: UIView {
     private lazy var button: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Установить статус", for: .normal)
+        button.setTitle("Изменить статус", for: .normal)
         button.backgroundColor = .systemBlue
         button.setTitleColor(.white, for: .normal)
         button.clipsToBounds = true
@@ -60,6 +63,8 @@ class ProfileHeaderView: UIView {
         button.layer.shadowOpacity = 0.7
         button.layer.masksToBounds = false
         button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(holdTapButton), for: .touchDown)
+        button.addTarget(self, action: #selector(dragExitButton), for: .touchDragExit)
         return button
     }()
     
@@ -100,66 +105,105 @@ class ProfileHeaderView: UIView {
         textField.textAlignment = .center
         textField.returnKeyType = UIReturnKeyType.done
         textField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
+        textField.isHidden = true
         return textField
     }()
     
-    private func setConstraintsPhote() {
-        self.photo.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
-        self.photo.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16).isActive = true
-        self.photo.heightAnchor.constraint(equalToConstant: imageHeight).isActive = true
-        self.photo.widthAnchor.constraint(equalToConstant: imageHeight).isActive = true
-    }
+    private lazy var constraintsPhoto = [
+        self.photo.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 16),
+        self.photo.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+        self.photo.heightAnchor.constraint(equalToConstant: imageHeight),
+        self.photo.widthAnchor.constraint(equalToConstant: imageHeight)
+    ]
     
-    private func setConstraintsButton() {
-        self.button.topAnchor.constraint(equalTo: photo.bottomAnchor, constant: 50).isActive = true
-        self.button.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16).isActive = true
-        self.button.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
-        self.button.heightAnchor.constraint(equalToConstant: 50).isActive = true
-    }
+    private lazy var constraintsButton = [
+        self.button.topAnchor.constraint(equalTo: photo.bottomAnchor, constant: 16),
+        self.button.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+        self.button.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+        self.button.heightAnchor.constraint(equalToConstant: 50)
+    ]
     
-    private func setConstraintsNameLable() {
-        self.nameLable.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 27).isActive = true
-        self.nameLable.leftAnchor.constraint(equalTo: photo.rightAnchor, constant: 16).isActive = true
-    }
+    private lazy var constraintsNameLable = [
+        self.nameLable.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 27),
+        self.nameLable.leftAnchor.constraint(equalTo: photo.rightAnchor, constant: 16)
+    ]
     
-    private func setConstraintsStatusLable() {
-        self.statusLable.bottomAnchor.constraint(equalTo: statusText.topAnchor, constant: -10).isActive = true
-        self.statusLable.leftAnchor.constraint(equalTo: photo.rightAnchor, constant: 16).isActive = true
-    }
+    private lazy var constraintsStatusLable = [
+        self.statusLable.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -34),
+        self.statusLable.leftAnchor.constraint(equalTo: photo.rightAnchor, constant: 16)
+    ]
     
-    private func setConstraintsStatusText() {
-        self.statusText.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -16).isActive = true
-        self.statusText.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
-        self.statusText.leftAnchor.constraint(equalTo: photo.rightAnchor, constant: 16).isActive = true
-        self.statusText.heightAnchor.constraint(equalToConstant: 40).isActive = true
-    }
+    private lazy var constraintsStatusText = [
+        self.statusText.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -16),
+        self.statusText.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+        self.statusText.leftAnchor.constraint(equalTo: photo.rightAnchor, constant: 16),
+        self.statusText.heightAnchor.constraint(equalToConstant: 40)
+    ]
     
     func constraintsSet() {
-        self.setConstraintsButton()
-        self.setConstraintsPhote()
-        self.setConstraintsNameLable()
-        self.setConstraintsStatusLable()
-        self.setConstraintsStatusText()
+        NSLayoutConstraint.activate(constraintsButton)
+        NSLayoutConstraint.activate(constraintsPhoto)
+        NSLayoutConstraint.activate(constraintsNameLable)
+        NSLayoutConstraint.activate(constraintsStatusText)
+        NSLayoutConstraint.activate(constraintsStatusLable)
     }
     
     @objc private func didTapButton(sender: UIButton) {
-        statusLable.text = currentStatus
-        animateView(sender)
+        self.animateTap(sender, 0.85)
+        self.statusText.isHidden.toggle()
+        if statusText.isHidden == false {
+            self.constraintsStatusLable[0].constant = -68
+            self.constraintsButton[0].constant = 50
+            self.button.setTitle("Установить статус", for: .normal)
+        } else {
+            self.constraintsButton[0].constant = 16
+            self.constraintsStatusLable[0].constant = -34
+            self.statusLable.text = currentStatus
+            self.statusText.text = ""
+            self.currentStatus = nil
+            self.button.setTitle("Изменить статус", for: .normal)
+        }
+        UIView.animate(withDuration: 0.75) {
+            self.layoutIfNeeded()
+        }
+    }
+    
+    @objc private func holdTapButton(sender: UIButton) {
+        self.animateHoldRelease(sender, 0.95, 0.85)
+    }
+    
+    @objc private func dragExitButton(sender: UIButton) {
+        self.animateHoldRelease(sender, 1.0, 0.85)
     }
     
     @objc private func statusTextChanged(_ textField: UITextField) {
-        if let text = textField.text, textField.text != currentStatus {
-            currentStatus = text
+        if let text = textField.text, textField.text != currentStatus, statusText.isHidden == false {
+            self.currentStatus = text
         }
     }
 
-    private func animateView(_ viewToAnimate: UIView) {
-        UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
-            viewToAnimate.transform =  CGAffineTransform(scaleX: 0.92, y: 0.92)
+    private func animateTap(_ viewToAnimate: UIView, _ duration: TimeInterval) {
+        UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
+            viewToAnimate.transform =  CGAffineTransform(scaleX: 0.95, y: 0.95)
         }) { (_) in
-            UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 2, options: .curveEaseIn, animations: {
+            UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 2, options: .curveEaseIn, animations: {
                 viewToAnimate.transform =  CGAffineTransform(scaleX: 1.0, y: 1.0)
             }, completion: nil)
         }
     }
+    
+    private func animateHoldRelease(_ viewToAnimate: UIView, _ scale: CGFloat, _ duration: TimeInterval) {
+        UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
+            viewToAnimate.transform =  CGAffineTransform(scaleX: scale, y: scale)
+        })
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = textField.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+        return updatedText.count <= statusLength
+    }
 }
+
+
