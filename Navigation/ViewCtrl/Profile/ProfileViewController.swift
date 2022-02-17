@@ -9,27 +9,46 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
-    var profileHeaderView = ProfileHeaderView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    private lazy var profileHeaderView: ProfileHeaderView = {
+        let view = ProfileHeaderView(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.hideKeyboardWhenTappedAround()
-        
-        self.view.addSubview(self.profileHeaderView)
-        
+        self.setNavigationBar()
+        self.setupView()
+    }
+    
+    private func setupView() {
         self.view.backgroundColor = .white
+        self.view.addSubview(self.profileHeaderView)
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        self.setSubViewConstraints()
+    }
+    
+    private func setSubViewConstraints() {
+        let profileViewConstraints = [
+            self.profileHeaderView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            self.profileHeaderView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
+            self.profileHeaderView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            self.profileHeaderView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+        ]
+        NSLayoutConstraint.activate(profileViewConstraints)
+    }
+    
+    private func setNavigationBar() {
         self.navigationItem.title = "Профиль"
         self.navigationItem.backButtonTitle = "Назад"
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemBlue]
-        
     }
     
-    override func viewWillLayoutSubviews() {
-        profileHeaderView.frame = self.view.safeAreaLayoutGuide.layoutFrame
-        profileHeaderView.constraintsSet()
-    }
 }
 
 

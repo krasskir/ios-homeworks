@@ -27,13 +27,13 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.lightGray.cgColor
         
-        self.statusText.delegate = self
-        
         self.addSubview(self.button)
         self.addSubview(self.photo)
         self.addSubview(self.nameLable)
         self.addSubview(self.statusLable)
         self.addSubview(self.statusText)
+        
+        self.constraintsSet()
     }
     
     private lazy var photo: UIImageView = {
@@ -106,6 +106,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
         textField.returnKeyType = UIReturnKeyType.done
         textField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
         textField.isHidden = true
+        textField.delegate = self
         return textField
     }()
     
@@ -117,7 +118,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     ]
     
     private lazy var constraintsButton = [
-        self.button.topAnchor.constraint(equalTo: photo.bottomAnchor, constant: 16),
+        self.button.topAnchor.constraint(equalTo: self.photo.bottomAnchor, constant: 16),
         self.button.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
         self.button.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
         self.button.heightAnchor.constraint(equalToConstant: 50)
@@ -125,22 +126,22 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     
     private lazy var constraintsNameLable = [
         self.nameLable.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 27),
-        self.nameLable.leftAnchor.constraint(equalTo: photo.rightAnchor, constant: 16)
+        self.nameLable.leftAnchor.constraint(equalTo: self.photo.rightAnchor, constant: 16)
     ]
     
     private lazy var constraintsStatusLable = [
-        self.statusLable.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -34),
-        self.statusLable.leftAnchor.constraint(equalTo: photo.rightAnchor, constant: 16)
+        self.statusLable.bottomAnchor.constraint(equalTo: self.button.topAnchor, constant: -34),
+        self.statusLable.leftAnchor.constraint(equalTo: self.photo.rightAnchor, constant: 16)
     ]
     
     private lazy var constraintsStatusText = [
-        self.statusText.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -16),
+        self.statusText.bottomAnchor.constraint(equalTo: self.button.topAnchor, constant: -14),
         self.statusText.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-        self.statusText.leftAnchor.constraint(equalTo: photo.rightAnchor, constant: 16),
+        self.statusText.leftAnchor.constraint(equalTo: self.photo.rightAnchor, constant: 16),
         self.statusText.heightAnchor.constraint(equalToConstant: 40)
     ]
     
-    func constraintsSet() {
+    private func constraintsSet() {
         NSLayoutConstraint.activate(constraintsButton)
         NSLayoutConstraint.activate(constraintsPhoto)
         NSLayoutConstraint.activate(constraintsNameLable)
@@ -150,20 +151,33 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     
     @objc private func didTapButton(sender: UIButton) {
         self.animateTap(sender, 0.85)
-        self.statusText.isHidden.toggle()
-        if statusText.isHidden == false {
-            self.constraintsStatusLable[0].constant = -68
-            self.constraintsButton[0].constant = 50
-            self.button.setTitle("Установить статус", for: .normal)
+        if statusText.isHidden {
+            didHideTextField()
         } else {
-            self.constraintsButton[0].constant = 16
-            self.constraintsStatusLable[0].constant = -34
-            self.statusLable.text = currentStatus
-            self.statusText.text = ""
-            self.currentStatus = nil
-            self.button.setTitle("Изменить статус", for: .normal)
+            willHideTextField()
         }
-        UIView.animate(withDuration: 0.75) {
+    }
+    
+    private func didHideTextField() {
+        self.constraintsStatusLable[0].constant = -68
+        self.constraintsButton[0].constant = 50
+        self.button.setTitle("Установить статус", for: .normal)
+        UIView.animate(withDuration: 0.45) {
+            self.layoutIfNeeded()
+        } completion: { _ in
+            self.statusText.isHidden.toggle()
+        }
+    }
+    
+    private func willHideTextField() {
+        self.statusText.isHidden.toggle()
+        self.constraintsButton[0].constant = 16
+        self.constraintsStatusLable[0].constant = -34
+        self.statusLable.text = currentStatus
+        self.statusText.text = ""
+        self.currentStatus = nil
+        self.button.setTitle("Изменить статус", for: .normal)
+        UIView.animate(withDuration: 0.45) {
             self.layoutIfNeeded()
         }
     }
