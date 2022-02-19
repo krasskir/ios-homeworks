@@ -126,18 +126,18 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     
     private lazy var constraintsNameLable = [
         self.nameLable.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 27),
-        self.nameLable.leftAnchor.constraint(equalTo: self.photo.rightAnchor, constant: 16)
+        self.nameLable.leadingAnchor.constraint(equalTo: self.photo.trailingAnchor, constant: 16)
     ]
     
     private lazy var constraintsStatusLable = [
         self.statusLable.bottomAnchor.constraint(equalTo: self.button.topAnchor, constant: -34),
-        self.statusLable.leftAnchor.constraint(equalTo: self.photo.rightAnchor, constant: 16)
+        self.statusLable.leadingAnchor.constraint(equalTo: self.photo.trailingAnchor, constant: 16)
     ]
     
     private lazy var constraintsStatusText = [
         self.statusText.bottomAnchor.constraint(equalTo: self.button.topAnchor, constant: -14),
         self.statusText.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-        self.statusText.leftAnchor.constraint(equalTo: self.photo.rightAnchor, constant: 16),
+        self.statusText.leadingAnchor.constraint(equalTo: self.photo.trailingAnchor, constant: 16),
         self.statusText.heightAnchor.constraint(equalToConstant: 40)
     ]
     

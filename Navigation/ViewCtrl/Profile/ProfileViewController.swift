@@ -20,16 +20,12 @@ class ProfileViewController: UIViewController {
         self.hideKeyboardWhenTappedAround()
         self.setNavigationBar()
         self.setupView()
+        self.setSubViewConstraints()
     }
     
     private func setupView() {
         self.view.backgroundColor = .white
         self.view.addSubview(self.profileHeaderView)
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        self.setSubViewConstraints()
     }
     
     private func setSubViewConstraints() {
