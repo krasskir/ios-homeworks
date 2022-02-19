@@ -150,7 +150,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     }
     
     @objc private func didTapButton(sender: UIButton) {
-        self.animateTap(sender, 0.85)
+        animateTap(sender, 0.85)
         if statusText.isHidden {
             didHideTextField()
         } else {
@@ -183,33 +183,17 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     }
     
     @objc private func holdTapButton(sender: UIButton) {
-        self.animateHoldRelease(sender, 0.95, 0.85)
+        animateHoldRelease(sender, 0.95, 0.85)
     }
     
     @objc private func dragExitButton(sender: UIButton) {
-        self.animateHoldRelease(sender, 1.0, 0.85)
+        animateHoldRelease(sender, 1.0, 0.85)
     }
     
     @objc private func statusTextChanged(_ textField: UITextField) {
         if let text = textField.text, textField.text != currentStatus, statusText.isHidden == false {
             self.currentStatus = text
         }
-    }
-
-    private func animateTap(_ viewToAnimate: UIView, _ duration: TimeInterval) {
-        UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
-            viewToAnimate.transform =  CGAffineTransform(scaleX: 0.95, y: 0.95)
-        }) { (_) in
-            UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 2, options: .curveEaseIn, animations: {
-                viewToAnimate.transform =  CGAffineTransform(scaleX: 1.0, y: 1.0)
-            }, completion: nil)
-        }
-    }
-    
-    private func animateHoldRelease(_ viewToAnimate: UIView, _ scale: CGFloat, _ duration: TimeInterval) {
-        UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
-            viewToAnimate.transform =  CGAffineTransform(scaleX: scale, y: scale)
-        })
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

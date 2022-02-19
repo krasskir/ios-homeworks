@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D4E518927C1101900359457 /* ButtonAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4E518827C1101900359457 /* ButtonAnimations.swift */; };
 		4DBB482527B5165900B4E989 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBB482427B5165900B4E989 /* AppDelegate.swift */; };
 		4DBB482727B5165900B4E989 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBB482627B5165900B4E989 /* SceneDelegate.swift */; };
 		4DBB482E27B5165B00B4E989 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DBB482D27B5165B00B4E989 /* Assets.xcassets */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4D4E518827C1101900359457 /* ButtonAnimations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonAnimations.swift; sourceTree = "<group>"; };
 		4DBB482127B5165900B4E989 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DBB482427B5165900B4E989 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4DBB482627B5165900B4E989 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 				4DDD35C327B69A6D00A5C29B /* ViewCtrl */,
 				4DD8774B27B79AC8000031F4 /* Post.swift */,
 				4DF831E127BBFD14005FA36D /* HideKeyboard.swift */,
+				4D4E518827C1101900359457 /* ButtonAnimations.swift */,
 				4DBB482D27B5165B00B4E989 /* Assets.xcassets */,
 				4DBB482F27B5165B00B4E989 /* LaunchScreen.storyboard */,
 				4DBB483227B5165B00B4E989 /* Info.plist */,
@@ -186,6 +189,7 @@
 				4DDD35C227B69A6800A5C29B /* PostViewController.swift in Sources */,
 				4DBB482527B5165900B4E989 /* AppDelegate.swift in Sources */,
 				4DDD35C027B69A5400A5C29B /* ProfileViewController.swift in Sources */,
+				4D4E518927C1101900359457 /* ButtonAnimations.swift in Sources */,
 				4DD8775427B7CEC3000031F4 /* TabBarController.swift in Sources */,
 				4DD8774E27B7AC3E000031F4 /* InfoViewController.swift in Sources */,
 				4DD8775227B7B0A7000031F4 /* AlertController.swift in Sources */,
