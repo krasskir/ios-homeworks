@@ -22,7 +22,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupView() {
+    private func setupView() {
         self.backgroundColor = .white
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.lightGray.cgColor

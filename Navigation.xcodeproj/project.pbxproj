@@ -18,6 +18,8 @@
 		4DDD35BC27B699F500A5C29B /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD35BB27B699F500A5C29B /* FeedViewController.swift */; };
 		4DDD35C027B69A5400A5C29B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD35BF27B69A5400A5C29B /* ProfileViewController.swift */; };
 		4DDD35C227B69A6800A5C29B /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD35C127B69A6800A5C29B /* PostViewController.swift */; };
+		4DE4C69027C61EBD00FA7E77 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE4C68F27C61EBD00FA7E77 /* LogInViewController.swift */; };
+		4DE4C69227C6215E00FA7E77 /* LoginHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE4C69127C6215D00FA7E77 /* LoginHeaderView.swift */; };
 		4DF831DB27B7D913005FA36D /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF831DA27B7D913005FA36D /* ProfileHeaderView.swift */; };
 		4DF831E227BBFD14005FA36D /* HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF831E127BBFD14005FA36D /* HideKeyboard.swift */; };
 /* End PBXBuildFile section */
@@ -36,6 +38,8 @@
 		4DDD35BB27B699F500A5C29B /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		4DDD35BF27B69A5400A5C29B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		4DDD35C127B69A6800A5C29B /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		4DE4C68F27C61EBD00FA7E77 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		4DE4C69127C6215D00FA7E77 /* LoginHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeaderView.swift; sourceTree = "<group>"; };
 		4DF831DA27B7D913005FA36D /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		4DF831E127BBFD14005FA36D /* HideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -106,6 +110,8 @@
 		4DF831DC27B7D928005FA36D /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				4DE4C68F27C61EBD00FA7E77 /* LogInViewController.swift */,
+				4DE4C69127C6215D00FA7E77 /* LoginHeaderView.swift */,
 				4DDD35BF27B69A5400A5C29B /* ProfileViewController.swift */,
 				4DF831DA27B7D913005FA36D /* ProfileHeaderView.swift */,
 			);
@@ -190,6 +196,8 @@
 				4DD8774E27B7AC3E000031F4 /* InfoViewController.swift in Sources */,
 				4DD8775227B7B0A7000031F4 /* AlertController.swift in Sources */,
 				4DD8774C27B79AC8000031F4 /* Post.swift in Sources */,
+				4DE4C69227C6215E00FA7E77 /* LoginHeaderView.swift in Sources */,
+				4DE4C69027C61EBD00FA7E77 /* LogInViewController.swift in Sources */,
 				4DF831DB27B7D913005FA36D /* ProfileHeaderView.swift in Sources */,
 				4DDD35BC27B699F500A5C29B /* FeedViewController.swift in Sources */,
 				4DBB482727B5165900B4E989 /* SceneDelegate.swift in Sources */,

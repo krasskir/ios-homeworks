@@ -40,7 +40,6 @@ class ProfileViewController: UIViewController {
     
     private func setNavigationBar() {
         self.navigationItem.title = "Профиль"
-        self.navigationItem.backButtonTitle = "Назад"
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemBlue]
     }
