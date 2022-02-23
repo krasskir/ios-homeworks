@@ -123,9 +123,12 @@ class LoginHeaderView: UIView, UITextFieldDelegate {
     
     private lazy var button: UIButton = {
         let button = UIButton()
-        let buttonBackgroundImage = UIImage(named: "blue_pixel.png")
+        let backgroundImage = UIImage(named: "blue_pixel.png")
         button.setTitle("Log in", for: .normal)
-        button.setBackgroundImage(buttonBackgroundImage, for: .normal)
+        button.setBackgroundImage(backgroundImage?.image(alpha: 1.0), for: .normal)
+        button.setBackgroundImage(backgroundImage?.image(alpha: 0.8), for: .selected)
+        button.setBackgroundImage(backgroundImage?.image(alpha: 0.8), for: .highlighted)
+        button.setBackgroundImage(backgroundImage?.image(alpha: 0.8), for: .disabled)
         button.setTitleColor(.white, for: .normal)
         button.clipsToBounds = true
         button.layer.cornerRadius = 10.0
@@ -193,5 +196,15 @@ extension UIColor {
         }
 
         return nil
+    }
+}
+
+extension UIImage {
+    func image(alpha: CGFloat) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        draw(at: .zero, blendMode: .normal, alpha: alpha)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
     }
 }

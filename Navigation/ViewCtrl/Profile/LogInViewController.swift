@@ -34,7 +34,7 @@ class LogInViewController: UIViewController {
             self.loginHeaderView.topAnchor.constraint(equalTo: self.scrollView.topAnchor),
             self.loginHeaderView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor),
             self.loginHeaderView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-            self.loginHeaderView.heightAnchor.constraint(equalToConstant: 1000)
+            self.loginHeaderView.heightAnchor.constraint(equalToConstant: 800)
         ]
     
     private var scrollView: UIScrollView = {
@@ -48,7 +48,7 @@ class LogInViewController: UIViewController {
             self.scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             self.scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             self.scrollView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            self.scrollView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+            self.scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         ]
     
     private func setNavigationBar() {
