@@ -20,6 +20,9 @@
 		4DDD35C227B69A6800A5C29B /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD35C127B69A6800A5C29B /* PostViewController.swift */; };
 		4DE4C69027C61EBD00FA7E77 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE4C68F27C61EBD00FA7E77 /* LogInViewController.swift */; };
 		4DE4C69227C6215E00FA7E77 /* LoginHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE4C69127C6215D00FA7E77 /* LoginHeaderView.swift */; };
+		4DE4C69D27C6A37400FA7E77 /* UIColorFromHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE4C69C27C6A37400FA7E77 /* UIColorFromHex.swift */; };
+		4DE4C69F27C6A3A400FA7E77 /* UIImageAlphaChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE4C69E27C6A3A400FA7E77 /* UIImageAlphaChange.swift */; };
+		4DE4C6A427C6A6E200FA7E77 /* LoginViewHeaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE4C6A327C6A6E200FA7E77 /* LoginViewHeaderDelegate.swift */; };
 		4DF831DB27B7D913005FA36D /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF831DA27B7D913005FA36D /* ProfileHeaderView.swift */; };
 		4DF831E227BBFD14005FA36D /* HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF831E127BBFD14005FA36D /* HideKeyboard.swift */; };
 /* End PBXBuildFile section */
@@ -30,7 +33,7 @@
 		4DBB482627B5165900B4E989 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		4DBB482D27B5165B00B4E989 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4DBB483027B5165B00B4E989 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		4DBB483227B5165B00B4E989 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4DBB483227B5165B00B4E989 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Navigation/Resourses/Info.plist; sourceTree = SOURCE_ROOT; };
 		4DD8774B27B79AC8000031F4 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		4DD8774D27B7AC3E000031F4 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		4DD8775127B7B0A7000031F4 /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
@@ -40,6 +43,9 @@
 		4DDD35C127B69A6800A5C29B /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		4DE4C68F27C61EBD00FA7E77 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		4DE4C69127C6215D00FA7E77 /* LoginHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeaderView.swift; sourceTree = "<group>"; };
+		4DE4C69C27C6A37400FA7E77 /* UIColorFromHex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorFromHex.swift; sourceTree = "<group>"; };
+		4DE4C69E27C6A3A400FA7E77 /* UIImageAlphaChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageAlphaChange.swift; sourceTree = "<group>"; };
+		4DE4C6A327C6A6E200FA7E77 /* LoginViewHeaderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewHeaderDelegate.swift; sourceTree = "<group>"; };
 		4DF831DA27B7D913005FA36D /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		4DF831E127BBFD14005FA36D /* HideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -75,12 +81,9 @@
 			isa = PBXGroup;
 			children = (
 				4DDD35BD27B69A0F00A5C29B /* Delegate */,
-				4DDD35C327B69A6D00A5C29B /* ViewCtrl */,
-				4DD8774B27B79AC8000031F4 /* Post.swift */,
-				4DF831E127BBFD14005FA36D /* HideKeyboard.swift */,
-				4DBB482D27B5165B00B4E989 /* Assets.xcassets */,
-				4DBB482F27B5165B00B4E989 /* LaunchScreen.storyboard */,
-				4DBB483227B5165B00B4E989 /* Info.plist */,
+				4DE4C69727C6A2B800FA7E77 /* Core */,
+				4DDD35C327B69A6D00A5C29B /* Presentation */,
+				4DE4C6A127C6A3EB00FA7E77 /* Resourses */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -94,26 +97,112 @@
 			path = Delegate;
 			sourceTree = "<group>";
 		};
-		4DDD35C327B69A6D00A5C29B /* ViewCtrl */ = {
+		4DDD35C327B69A6D00A5C29B /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				4DD8775327B7CEC3000031F4 /* TabBarController.swift */,
+				4DE4C69A27C6A32900FA7E77 /* Modules */,
+				4DE4C69B27C6A34900FA7E77 /* Extention */,
+				4DE4C6A227C6A69400FA7E77 /* Protocols */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		4DE4C69427C6A25200FA7E77 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
 				4DDD35BB27B699F500A5C29B /* FeedViewController.swift */,
-				4DF831DC27B7D928005FA36D /* Profile */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		4DE4C69527C6A27100FA7E77 /* Post */ = {
+			isa = PBXGroup;
+			children = (
 				4DDD35C127B69A6800A5C29B /* PostViewController.swift */,
 				4DD8774D27B7AC3E000031F4 /* InfoViewController.swift */,
 				4DD8775127B7B0A7000031F4 /* AlertController.swift */,
 			);
-			path = ViewCtrl;
+			path = Post;
+			sourceTree = "<group>";
+		};
+		4DE4C69727C6A2B800FA7E77 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				4DE4C69827C6A2D200FA7E77 /* Models */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		4DE4C69827C6A2D200FA7E77 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4DD8774B27B79AC8000031F4 /* Post.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4DE4C69A27C6A32900FA7E77 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				4DE4C6A527C6A72A00FA7E77 /* TabBar */,
+				4DF831DC27B7D928005FA36D /* Profile */,
+				4DE4C69427C6A25200FA7E77 /* Feed */,
+				4DE4C69527C6A27100FA7E77 /* Post */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		4DE4C69B27C6A34900FA7E77 /* Extention */ = {
+			isa = PBXGroup;
+			children = (
+				4DF831E127BBFD14005FA36D /* HideKeyboard.swift */,
+				4DE4C69C27C6A37400FA7E77 /* UIColorFromHex.swift */,
+				4DE4C69E27C6A3A400FA7E77 /* UIImageAlphaChange.swift */,
+			);
+			path = Extention;
+			sourceTree = "<group>";
+		};
+		4DE4C6A027C6A3D200FA7E77 /* HeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				4DE4C69127C6215D00FA7E77 /* LoginHeaderView.swift */,
+				4DF831DA27B7D913005FA36D /* ProfileHeaderView.swift */,
+			);
+			path = HeaderView;
+			sourceTree = "<group>";
+		};
+		4DE4C6A127C6A3EB00FA7E77 /* Resourses */ = {
+			isa = PBXGroup;
+			children = (
+				4DBB482D27B5165B00B4E989 /* Assets.xcassets */,
+				4DBB482F27B5165B00B4E989 /* LaunchScreen.storyboard */,
+				4DBB483227B5165B00B4E989 /* Info.plist */,
+			);
+			path = Resourses;
+			sourceTree = "<group>";
+		};
+		4DE4C6A227C6A69400FA7E77 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				4DE4C6A327C6A6E200FA7E77 /* LoginViewHeaderDelegate.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		4DE4C6A527C6A72A00FA7E77 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				4DD8775327B7CEC3000031F4 /* TabBarController.swift */,
+			);
+			path = TabBar;
 			sourceTree = "<group>";
 		};
 		4DF831DC27B7D928005FA36D /* Profile */ = {
 			isa = PBXGroup;
 			children = (
 				4DE4C68F27C61EBD00FA7E77 /* LogInViewController.swift */,
-				4DE4C69127C6215D00FA7E77 /* LoginHeaderView.swift */,
 				4DDD35BF27B69A5400A5C29B /* ProfileViewController.swift */,
-				4DF831DA27B7D913005FA36D /* ProfileHeaderView.swift */,
+				4DE4C6A027C6A3D200FA7E77 /* HeaderView */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -188,7 +277,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DE4C6A427C6A6E200FA7E77 /* LoginViewHeaderDelegate.swift in Sources */,
 				4DF831E227BBFD14005FA36D /* HideKeyboard.swift in Sources */,
+				4DE4C69F27C6A3A400FA7E77 /* UIImageAlphaChange.swift in Sources */,
+				4DE4C69D27C6A37400FA7E77 /* UIColorFromHex.swift in Sources */,
 				4DDD35C227B69A6800A5C29B /* PostViewController.swift in Sources */,
 				4DBB482527B5165900B4E989 /* AppDelegate.swift in Sources */,
 				4DDD35C027B69A5400A5C29B /* ProfileViewController.swift in Sources */,
@@ -343,7 +435,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 29FYHCZ9A5;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Navigation/Info.plist;
+				INFOPLIST_FILE = Navigation/Resourses/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -370,7 +462,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 29FYHCZ9A5;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Navigation/Info.plist;
+				INFOPLIST_FILE = Navigation/Resourses/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

@@ -9,7 +9,7 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
-    let firstPost: Post = Post(title: "Какой-то пост")
+    var firstPost: Post = Post(title: "Перый пост", author: "Kirill", image: "cat.jpg")
     
     private lazy var button: UIButton = {
         let button = UIButton()
@@ -25,7 +25,7 @@ class FeedViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         self.view.addSubview(self.button)
         
         self.button.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
