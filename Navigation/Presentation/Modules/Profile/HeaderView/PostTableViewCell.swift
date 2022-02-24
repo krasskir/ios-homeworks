@@ -161,7 +161,7 @@ extension PostTableViewCell: Setupable {
         self.postImage.image = UIImage(named: viewModel.image)
         self.postText.text = viewModel.description
         self.likes.text = "Likes: " + String(viewModel.likes)
-        self.views.text = "View: " + String(viewModel.views)
+        self.views.text = "Views: " + String(viewModel.views)
         self.author = viewModel.author
     }
 }
