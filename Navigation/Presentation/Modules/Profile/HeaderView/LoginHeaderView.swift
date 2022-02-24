@@ -46,6 +46,8 @@ class LoginHeaderView: UIView, UITextFieldDelegate {
     private lazy var logoView: UIImageView = {
         let logo = UIImage(named: "logo.png")
         let logoView = UIImageView()
+        logoView.clipsToBounds = true
+        logoView.frame.size = CGSize(width: 100, height: 100)
         logoView.image = logo
         logoView.translatesAutoresizingMaskIntoConstraints = false
         return logoView

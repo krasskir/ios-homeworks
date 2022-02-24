@@ -12,6 +12,7 @@ struct Post {
     
     let title: String
     let author: String
+    let discription: String
     let image: String
     
     lazy var views: Int = randomInt
