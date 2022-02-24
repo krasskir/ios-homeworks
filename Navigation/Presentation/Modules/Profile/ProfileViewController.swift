@@ -81,7 +81,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                                                     views: post.views,
                                                     likes: post.likes)
         cell.setup(with: viewModel)
-        cell.backgroundColor = .red
+        cell.backgroundColor = .white
         return cell
     }
 }

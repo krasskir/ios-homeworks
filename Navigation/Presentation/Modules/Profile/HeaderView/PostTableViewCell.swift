@@ -105,7 +105,7 @@ class PostTableViewCell: UITableViewCell {
     }
     
     private func setupView() {
-        self.contentView.backgroundColor = .blue
+        self.contentView.backgroundColor = .white
 
         self.contentView.addSubview(self.backView)
         self.stackView.addSubview(self.titlePost)
