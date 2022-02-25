@@ -26,7 +26,7 @@
 		4DE4C6A827C6CE3C00FA7E77 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE4C6A727C6CE3C00FA7E77 /* PostTableViewCell.swift */; };
 		4DE4C6AA27C6CED900FA7E77 /* Setupable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE4C6A927C6CED900FA7E77 /* Setupable.swift */; };
 		4DE4C6AC27C7FB3700FA7E77 /* testPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE4C6AB27C7FB3700FA7E77 /* testPosts.swift */; };
-		4DF831DB27B7D913005FA36D /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF831DA27B7D913005FA36D /* ProfileHeaderView.swift */; };
+		4DF831DB27B7D913005FA36D /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF831DA27B7D913005FA36D /* ProfileHeader.swift */; };
 		4DF831E227BBFD14005FA36D /* HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF831E127BBFD14005FA36D /* HideKeyboard.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,7 +52,7 @@
 		4DE4C6A727C6CE3C00FA7E77 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		4DE4C6A927C6CED900FA7E77 /* Setupable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setupable.swift; sourceTree = "<group>"; };
 		4DE4C6AB27C7FB3700FA7E77 /* testPosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testPosts.swift; sourceTree = "<group>"; };
-		4DF831DA27B7D913005FA36D /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		4DF831DA27B7D913005FA36D /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
 		4DF831E127BBFD14005FA36D /* HideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -172,7 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				4DE4C69127C6215D00FA7E77 /* LoginHeaderView.swift */,
-				4DF831DA27B7D913005FA36D /* ProfileHeaderView.swift */,
+				4DF831DA27B7D913005FA36D /* ProfileHeader.swift */,
 			);
 			path = HeaderView;
 			sourceTree = "<group>";
@@ -311,7 +311,7 @@
 				4DD8774C27B79AC8000031F4 /* Post.swift in Sources */,
 				4DE4C69227C6215E00FA7E77 /* LoginHeaderView.swift in Sources */,
 				4DE4C69027C61EBD00FA7E77 /* LogInViewController.swift in Sources */,
-				4DF831DB27B7D913005FA36D /* ProfileHeaderView.swift in Sources */,
+				4DF831DB27B7D913005FA36D /* ProfileHeader.swift in Sources */,
 				4DDD35BC27B699F500A5C29B /* FeedViewController.swift in Sources */,
 				4DBB482727B5165900B4E989 /* SceneDelegate.swift in Sources */,
 			);
