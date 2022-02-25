@@ -66,6 +66,5 @@ extension LogInViewController: LoginViewHeaderDelegate {
     func didTapButton() {
         let profile = ProfileViewController()
         self.navigationController?.pushViewController(profile, animated: true)
-        self.navigationController?.navigationBar.isHidden = false
     }
 }

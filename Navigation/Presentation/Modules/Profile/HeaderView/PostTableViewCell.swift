@@ -9,7 +9,7 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell {
 
-    struct ViewModel: ViewModelProtocol {
+    struct PostCell: PostViewCellProtocol {
         var title: String
         var author: String
         var image: String
@@ -26,6 +26,9 @@ class PostTableViewCell: UITableViewCell {
     private lazy var backView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
+        view.clipsToBounds = true
+        view.layer.borderWidth = 0.5
+        view.layer.borderColor = UIColor.lightGray.cgColor
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -154,9 +157,9 @@ class PostTableViewCell: UITableViewCell {
     ]
 }
 
-extension PostTableViewCell: Setupable {
-    func setup(with viewModel: ViewModelProtocol) {
-        guard let viewModel = viewModel as? ViewModel else { return }
+extension PostTableViewCell: PostSetupable {
+    func setup(with viewModel: PostViewCellProtocol) {
+        guard let viewModel = viewModel as? PostCell else { return }
         self.titlePost.text = viewModel.title
         self.postImage.image = UIImage(named: viewModel.image)
         self.postText.text = viewModel.description

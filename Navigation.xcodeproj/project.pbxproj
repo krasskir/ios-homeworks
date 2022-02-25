@@ -24,8 +24,11 @@
 		4DE4C69F27C6A3A400FA7E77 /* UIImageAlphaChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE4C69E27C6A3A400FA7E77 /* UIImageAlphaChange.swift */; };
 		4DE4C6A427C6A6E200FA7E77 /* LoginViewHeaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE4C6A327C6A6E200FA7E77 /* LoginViewHeaderDelegate.swift */; };
 		4DE4C6A827C6CE3C00FA7E77 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE4C6A727C6CE3C00FA7E77 /* PostTableViewCell.swift */; };
-		4DE4C6AA27C6CED900FA7E77 /* Setupable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE4C6A927C6CED900FA7E77 /* Setupable.swift */; };
+		4DE4C6AA27C6CED900FA7E77 /* PostSetupable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE4C6A927C6CED900FA7E77 /* PostSetupable.swift */; };
 		4DE4C6AC27C7FB3700FA7E77 /* testPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE4C6AB27C7FB3700FA7E77 /* testPosts.swift */; };
+		4DE5ACBD27C9122B00471282 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE5ACBC27C9122A00471282 /* PhotosTableViewCell.swift */; };
+		4DE5ACBF27C94DF300471282 /* testPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE5ACBE27C94DF300471282 /* testPhoto.swift */; };
+		4DE5ACC127C95EA300471282 /* DefaultHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE5ACC027C95EA300471282 /* DefaultHeader.swift */; };
 		4DF831DB27B7D913005FA36D /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF831DA27B7D913005FA36D /* ProfileHeader.swift */; };
 		4DF831E227BBFD14005FA36D /* HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF831E127BBFD14005FA36D /* HideKeyboard.swift */; };
 /* End PBXBuildFile section */
@@ -50,8 +53,11 @@
 		4DE4C69E27C6A3A400FA7E77 /* UIImageAlphaChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageAlphaChange.swift; sourceTree = "<group>"; };
 		4DE4C6A327C6A6E200FA7E77 /* LoginViewHeaderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewHeaderDelegate.swift; sourceTree = "<group>"; };
 		4DE4C6A727C6CE3C00FA7E77 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
-		4DE4C6A927C6CED900FA7E77 /* Setupable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setupable.swift; sourceTree = "<group>"; };
+		4DE4C6A927C6CED900FA7E77 /* PostSetupable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSetupable.swift; sourceTree = "<group>"; };
 		4DE4C6AB27C7FB3700FA7E77 /* testPosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testPosts.swift; sourceTree = "<group>"; };
+		4DE5ACBC27C9122A00471282 /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
+		4DE5ACBE27C94DF300471282 /* testPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testPhoto.swift; sourceTree = "<group>"; };
+		4DE5ACC027C95EA300471282 /* DefaultHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHeader.swift; sourceTree = "<group>"; };
 		4DF831DA27B7D913005FA36D /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
 		4DF831E127BBFD14005FA36D /* HideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -173,6 +179,7 @@
 			children = (
 				4DE4C69127C6215D00FA7E77 /* LoginHeaderView.swift */,
 				4DF831DA27B7D913005FA36D /* ProfileHeader.swift */,
+				4DE5ACC027C95EA300471282 /* DefaultHeader.swift */,
 			);
 			path = HeaderView;
 			sourceTree = "<group>";
@@ -184,6 +191,7 @@
 				4DBB482F27B5165B00B4E989 /* LaunchScreen.storyboard */,
 				4DBB483227B5165B00B4E989 /* Info.plist */,
 				4DE4C6AB27C7FB3700FA7E77 /* testPosts.swift */,
+				4DE5ACBE27C94DF300471282 /* testPhoto.swift */,
 			);
 			path = Resourses;
 			sourceTree = "<group>";
@@ -192,7 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				4DE4C6A327C6A6E200FA7E77 /* LoginViewHeaderDelegate.swift */,
-				4DE4C6A927C6CED900FA7E77 /* Setupable.swift */,
+				4DE4C6A927C6CED900FA7E77 /* PostSetupable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -209,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				4DE4C6A727C6CE3C00FA7E77 /* PostTableViewCell.swift */,
+				4DE5ACBC27C9122A00471282 /* PhotosTableViewCell.swift */,
 			);
 			name = Cell;
 			path = HeaderView;
@@ -295,21 +304,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DE5ACBD27C9122B00471282 /* PhotosTableViewCell.swift in Sources */,
 				4DE4C6A427C6A6E200FA7E77 /* LoginViewHeaderDelegate.swift in Sources */,
 				4DF831E227BBFD14005FA36D /* HideKeyboard.swift in Sources */,
 				4DE4C6A827C6CE3C00FA7E77 /* PostTableViewCell.swift in Sources */,
+				4DE5ACC127C95EA300471282 /* DefaultHeader.swift in Sources */,
 				4DE4C69F27C6A3A400FA7E77 /* UIImageAlphaChange.swift in Sources */,
 				4DE4C69D27C6A37400FA7E77 /* UIColorFromHex.swift in Sources */,
 				4DDD35C227B69A6800A5C29B /* PostViewController.swift in Sources */,
 				4DE4C6AC27C7FB3700FA7E77 /* testPosts.swift in Sources */,
 				4DBB482527B5165900B4E989 /* AppDelegate.swift in Sources */,
 				4DDD35C027B69A5400A5C29B /* ProfileViewController.swift in Sources */,
-				4DE4C6AA27C6CED900FA7E77 /* Setupable.swift in Sources */,
+				4DE4C6AA27C6CED900FA7E77 /* PostSetupable.swift in Sources */,
 				4DD8775427B7CEC3000031F4 /* TabBarController.swift in Sources */,
 				4DD8774E27B7AC3E000031F4 /* InfoViewController.swift in Sources */,
 				4DD8775227B7B0A7000031F4 /* AlertController.swift in Sources */,
 				4DD8774C27B79AC8000031F4 /* Post.swift in Sources */,
 				4DE4C69227C6215E00FA7E77 /* LoginHeaderView.swift in Sources */,
+				4DE5ACBF27C94DF300471282 /* testPhoto.swift in Sources */,
 				4DE4C69027C61EBD00FA7E77 /* LogInViewController.swift in Sources */,
 				4DF831DB27B7D913005FA36D /* ProfileHeader.swift in Sources */,
 				4DDD35BC27B699F500A5C29B /* FeedViewController.swift in Sources */,

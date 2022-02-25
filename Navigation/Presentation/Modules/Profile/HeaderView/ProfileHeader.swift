@@ -1,5 +1,5 @@
 //
-//  ProfileHeaderView.swift
+//  ProfileHeader.swift
 //  Navigation
 //
 //  Created by Kirill Krasavin on 12.02.2022.
@@ -36,9 +36,7 @@ class ProfileHeader: UITableViewHeaderFooterView {
     
     private lazy var backView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
-        view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor.lightGray.cgColor
+        view.backgroundColor = .systemGroupedBackground
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
