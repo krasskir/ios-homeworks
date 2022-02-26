@@ -62,7 +62,7 @@ class LogInViewController: UIViewController {
     }
 }
 
-extension LogInViewController: LoginViewHeaderDelegate {
+extension LogInViewController: ButtonPushDelegate {
     func didTapButton() {
         let profile = ProfileViewController()
         self.navigationController?.pushViewController(profile, animated: true)

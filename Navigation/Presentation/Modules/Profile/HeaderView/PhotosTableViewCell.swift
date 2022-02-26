@@ -9,7 +9,9 @@ import UIKit
 
 class PhotosTableViewCell: UITableViewCell {
     
-    struct PhotoCell: PhotoViewCellPorotocol {
+    weak var delegateButton: ButtonPushDelegate?
+    
+    struct PhotoTableCell: PhotoTableViewCellPorotocol {
         var photo: [String]
     }
     
@@ -105,7 +107,11 @@ class PhotosTableViewCell: UITableViewCell {
         super.prepareForReuse()
     }
     
-    func setupView() {
+    private func setupView() {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(moveToPhotos))
+        self.contentView.isUserInteractionEnabled = true
+        self.contentView.addGestureRecognizer(gesture)
+        
         self.contentView.backgroundColor = .white
         self.contentView.clipsToBounds = true
         self.contentView.layer.borderWidth = 1
@@ -154,11 +160,15 @@ class PhotosTableViewCell: UITableViewCell {
         
         self.stackImage.heightAnchor.constraint(equalToConstant: stackImageHeight())
     ]
+    
+    @objc func moveToPhotos(_ sender: UITapGestureRecognizer){
+        delegateButton?.didTapButton()
+    }
 }
 
-extension PhotosTableViewCell: PhotoSetupable {
-    func setup(with viewModel: PhotoViewCellPorotocol) {
-        guard let viewModel = viewModel as? PhotoCell else { return }
+extension PhotosTableViewCell: PhotoTableSetupable {
+    func setup(with viewModel: PhotoTableViewCellPorotocol) {
+        guard let viewModel = viewModel as? PhotoTableCell else { return }
         self.imageA.image = UIImage(named: viewModel.photo[0])
         self.imageB.image = UIImage(named: viewModel.photo[1])
         self.imageC.image = UIImage(named: viewModel.photo[2])

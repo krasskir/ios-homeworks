@@ -1,5 +1,5 @@
 //
-//  LoginViewHeaderDelegate.swift
+//  ButtonPushDelegate.swift
 //  Navigation
 //
 //  Created by Kirill Krasavin on 23.02.2022.
@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol LoginViewHeaderDelegate: AnyObject {
+protocol ButtonPushDelegate: AnyObject {
     func didTapButton()
 }

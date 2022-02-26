@@ -17,6 +17,7 @@ class ProfileViewController: UIViewController {
         self.dataSourcePost = testPostArray
         self.dataSourcePhoto = Array(testPhotoArray.prefix(4))
         self.hideKeyboardWhenTappedAround()
+        self.setNavigationBar()
         self.setupView()
         self.setConstraints()
     }
@@ -24,6 +25,11 @@ class ProfileViewController: UIViewController {
     private func setupView() {
         self.view.backgroundColor = .systemGroupedBackground
         self.view.addSubview(postTableView)
+    }
+    
+    private func setNavigationBar() {
+        self.navigationItem.backButtonTitle = "Назад"
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     private func setConstraints() {
@@ -76,7 +82,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 return cell
             }
             let photoArray = self.dataSourcePhoto
-            let viewModel = PhotosTableViewCell.PhotoCell(photo: photoArray)
+            let viewModel = PhotosTableViewCell.PhotoTableCell(photo: photoArray)
+            cell.delegateButton = self
             cell.setup(with: viewModel)
             cell.backgroundColor = .white
             return cell
@@ -115,6 +122,9 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-
-
-
+extension ProfileViewController: ButtonPushDelegate {
+    func didTapButton() {
+        let photos = PhotosViewController()
+        self.navigationController?.pushViewController(photos, animated: true)
+    }
+}

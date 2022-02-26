@@ -9,7 +9,7 @@ import UIKit
 
 class LoginHeaderView: UIView, UITextFieldDelegate {
     
-    weak var delegateButton: LoginViewHeaderDelegate?
+    weak var delegateButton: ButtonPushDelegate?
     
     private var emailText: String?
     private var passwordText: String?
