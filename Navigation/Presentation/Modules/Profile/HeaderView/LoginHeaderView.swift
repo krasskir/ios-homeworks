@@ -84,7 +84,7 @@ class LoginHeaderView: UIView, UITextFieldDelegate {
         textField.layer.borderWidth = 0.5
         textField.layer.cornerRadius = 10.0
         textField.backgroundColor = .systemGray6
-        textField.placeholder = " Email or phone"
+        textField.placeholder = " Email или номер телефона"
         textField.autocapitalizationType = .none
         textField.clearButtonMode = UITextField.ViewMode.whileEditing
         textField.keyboardType = UIKeyboardType.emailAddress
@@ -106,7 +106,7 @@ class LoginHeaderView: UIView, UITextFieldDelegate {
         textField.layer.borderWidth = 0.5
         textField.layer.cornerRadius = 10.0
         textField.backgroundColor = .systemGray6
-        textField.placeholder = " Password"
+        textField.placeholder = " Пароль"
         textField.clearButtonMode = UITextField.ViewMode.whileEditing
         textField.keyboardType = UIKeyboardType.default
         textField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
@@ -122,7 +122,7 @@ class LoginHeaderView: UIView, UITextFieldDelegate {
     private lazy var button: UIButton = {
         let button = UIButton()
         let backgroundImage = UIImage(named: "blue_pixel.png")
-        button.setTitle("Log in", for: .normal)
+        button.setTitle("Войти", for: .normal)
         button.setBackgroundImage(backgroundImage?.image(alpha: 1.0), for: .normal)
         button.setBackgroundImage(backgroundImage?.image(alpha: 0.8), for: .selected)
         button.setBackgroundImage(backgroundImage?.image(alpha: 0.8), for: .highlighted)

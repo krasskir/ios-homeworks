@@ -25,7 +25,7 @@ class PhotosTableViewCell: UITableViewCell {
     
     private lazy var textLable: UILabel = {
         let text = UILabel()
-        text.text = "Photo"
+        text.text = "Фото"
         text.font = .systemFont(ofSize: 24.0, weight: .bold)
         text.textColor = .black
         text.numberOfLines = 0

@@ -16,7 +16,6 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     private lazy var image: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.backgroundColor = .black
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
