@@ -31,6 +31,7 @@
 		4DE5ACC127C95EA300471282 /* DefaultHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE5ACC027C95EA300471282 /* DefaultHeader.swift */; };
 		4DE5ACC327CA2CCC00471282 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE5ACC227CA2CCC00471282 /* PhotosViewController.swift */; };
 		4DE5ACC527CA2D3C00471282 /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE5ACC427CA2D3C00471282 /* PhotosCollectionViewCell.swift */; };
+		4DE5ACC727CA79DD00471282 /* GestureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE5ACC627CA79DD00471282 /* GestureViewController.swift */; };
 		4DF831DB27B7D913005FA36D /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF831DA27B7D913005FA36D /* ProfileHeader.swift */; };
 		4DF831E227BBFD14005FA36D /* HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF831E127BBFD14005FA36D /* HideKeyboard.swift */; };
 /* End PBXBuildFile section */
@@ -62,6 +63,7 @@
 		4DE5ACC027C95EA300471282 /* DefaultHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHeader.swift; sourceTree = "<group>"; };
 		4DE5ACC227CA2CCC00471282 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		4DE5ACC427CA2D3C00471282 /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
+		4DE5ACC627CA79DD00471282 /* GestureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureViewController.swift; sourceTree = "<group>"; };
 		4DF831DA27B7D913005FA36D /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
 		4DF831E127BBFD14005FA36D /* HideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -164,6 +166,7 @@
 				4DF831DC27B7D928005FA36D /* Profile */,
 				4DE4C69427C6A25200FA7E77 /* Feed */,
 				4DE4C69527C6A27100FA7E77 /* Post */,
+				4DE5ACC627CA79DD00471282 /* GestureViewController.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 				4DE5ACBD27C9122B00471282 /* PhotosTableViewCell.swift in Sources */,
 				4DE4C6A427C6A6E200FA7E77 /* ButtonPushDelegate.swift in Sources */,
 				4DF831E227BBFD14005FA36D /* HideKeyboard.swift in Sources */,
+				4DE5ACC727CA79DD00471282 /* GestureViewController.swift in Sources */,
 				4DE4C6A827C6CE3C00FA7E77 /* PostTableViewCell.swift in Sources */,
 				4DE5ACC127C95EA300471282 /* DefaultHeader.swift in Sources */,
 				4DE5ACC527CA2D3C00471282 /* PhotosCollectionViewCell.swift in Sources */,
