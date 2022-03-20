@@ -144,7 +144,18 @@ class LoginHeaderView: UIView, UITextFieldDelegate {
     ]
     
     @objc private func didTapButton(sender: UIButton) {
-        guard emailText != nil && passwordText != nil else { return }
+        guard emailText != nil else {
+            self.isEmptyTextField(self.emailTextField, 0.35)
+            return
+        }
+        guard passwordText != nil else {
+            self.isEmptyTextField(self.passwordTextField, 0.35)
+            return
+        }
+        guard self.isValidated(passwordText!) else {
+            print("Сделай пароль больще 8 символов")
+            return
+        }
         delegateButton?.didTapButton()
         clearTextField()
     }
@@ -167,7 +178,29 @@ class LoginHeaderView: UIView, UITextFieldDelegate {
             self.passwordText = text
         }
     }
+    
+    private func isEmptyTextField(_ viewToAnimate: UIView, _ duration: TimeInterval) {
+        UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
+            viewToAnimate.transform =  CGAffineTransform(scaleX: 0.985, y: 0.985)
+            viewToAnimate.layer.borderColor = UIColor.systemRed.cgColor
+            viewToAnimate.layer.borderWidth = 1.5
+        }) { (_) in
+            UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 2, options: .curveEaseIn, animations: {
+                viewToAnimate.transform =  CGAffineTransform(scaleX: 1.0, y: 1.0)
+                viewToAnimate.layer.borderColor = UIColor.lightGray.cgColor
+                viewToAnimate.layer.borderWidth = 0.5
+            }, completion: nil)
+        }
+    }
+    
+    private func isValidated(_ password: String) -> Bool {
+        if password.count >= 8 {
+            return true
+        }
+        return false
+    }
 }
+
 
 
 
