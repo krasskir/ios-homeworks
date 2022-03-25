@@ -28,19 +28,21 @@ class LoginHeaderView: UIView, UITextFieldDelegate {
     private func setupView() {
         self.backgroundColor = .white
         
-        self.addSubview(logoView)
-        self.stackTextViews.addArrangedSubview(emailTextField)
-        self.stackTextViews.addArrangedSubview(passwordTextField)
-        self.addSubview(stackTextViews)
-        self.addSubview(button)
+        self.addSubview(self.logoView)
+        self.stackTextViews.addArrangedSubview(self.emailTextField)
+        self.stackTextViews.addArrangedSubview(self.passwordTextField)
+        self.addSubview(self.stackTextViews)
+        self.addSubview(self.button)
+        self.addSubview(self.passwordErrorLable)
         
         self.constraintsSet()
     }
     
     private func constraintsSet() {
-        NSLayoutConstraint.activate(logoViewConstraints)
-        NSLayoutConstraint.activate(stackTextViewsConstraints)
-        NSLayoutConstraint.activate(buttonConstraints)
+        NSLayoutConstraint.activate(self.logoViewConstraints)
+        NSLayoutConstraint.activate(self.stackTextViewsConstraints)
+        NSLayoutConstraint.activate(self.buttonConstraints)
+        NSLayoutConstraint.activate(self.lableConstraints)
     }
     
     private lazy var logoView: UIImageView = {
@@ -143,17 +145,37 @@ class LoginHeaderView: UIView, UITextFieldDelegate {
         self.button.heightAnchor.constraint(equalToConstant: 50)
     ]
     
+    private lazy var passwordErrorLable: UILabel = {
+       let lable = UILabel()
+        lable.translatesAutoresizingMaskIntoConstraints = false
+        lable.textColor = .systemRed
+        lable.font = UIFont.systemFont(ofSize: 10.0)
+        lable.text = "Пароль должен быть больше 8 символов."
+        lable.isHidden = true
+        return lable
+    }()
+    
+    private lazy var lableConstraints = [
+        self.passwordErrorLable.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+        self.passwordErrorLable.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+        self.passwordErrorLable.topAnchor.constraint(equalTo: self.stackTextViews.bottomAnchor, constant: 2),
+        self.passwordErrorLable.heightAnchor.constraint(equalToConstant: 10)
+    ]
+    
     @objc private func didTapButton(sender: UIButton) {
-        guard emailText != nil else {
+        self.passwordErrorLable.isHidden = true
+        guard self.emailText != nil,
+              self.emailText != "" else {
             self.isEmptyTextField(self.emailTextField, 0.35)
             return
         }
-        guard passwordText != nil else {
+        guard self.passwordText != nil,
+              self.passwordText != ""else {
             self.isEmptyTextField(self.passwordTextField, 0.35)
             return
         }
-        guard self.isValidated(passwordText!) else {
-            print("Сделай пароль больще 8 символов")
+        guard self.isValidated(self.passwordText!) else {
+            self.passwordErrorLable.isHidden = false
             return
         }
         delegateButton?.didTapButton()
@@ -165,18 +187,19 @@ class LoginHeaderView: UIView, UITextFieldDelegate {
         passwordTextField.text = nil
         emailText = nil
         passwordText = nil
+        self.passwordErrorLable.isHidden = true
     }
 
     @objc private func emailTextChange(_ textField: UITextField) {
-        if let text = textField.text {
-            self.emailText = text
-        }
+//        if let text = textField.text {
+        self.emailText = textField.text
+//        }
     }
 
     @objc private func passwordTextChange(_ textField: UITextField) {
-        if let text = textField.text {
-            self.passwordText = text
-        }
+//        if let text = textField.text {
+        self.passwordText = textField.text
+//        }
     }
     
     private func isEmptyTextField(_ viewToAnimate: UIView, _ duration: TimeInterval) {
