@@ -37,6 +37,7 @@ class LoginHeaderView: UIView, UITextFieldDelegate {
         self.addSubview(self.stackTextViews)
         self.addSubview(self.button)
         self.addSubview(self.passwordErrorLable)
+        self.addSubview(self.emailErrorLable)
         
         self.constraintsSet()
     }
@@ -45,7 +46,8 @@ class LoginHeaderView: UIView, UITextFieldDelegate {
         NSLayoutConstraint.activate(self.logoViewConstraints)
         NSLayoutConstraint.activate(self.stackTextViewsConstraints)
         NSLayoutConstraint.activate(self.buttonConstraints)
-        NSLayoutConstraint.activate(self.lableConstraints)
+        NSLayoutConstraint.activate(self.passwordErrorLableConstraints)
+        NSLayoutConstraint.activate(self.emailErrorLableConstraints)
     }
     
     private lazy var logoView: UIImageView = {
@@ -153,49 +155,78 @@ class LoginHeaderView: UIView, UITextFieldDelegate {
         lable.translatesAutoresizingMaskIntoConstraints = false
         lable.textColor = .systemRed
         lable.font = UIFont.systemFont(ofSize: 10.0)
-        lable.text = "Пароль должен быть больше 8 символов."
+        lable.text = "Пароль должен быть больше 8 символов"
         lable.isHidden = true
         return lable
     }()
     
-    private lazy var lableConstraints = [
+    private lazy var passwordErrorLableConstraints = [
         self.passwordErrorLable.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
         self.passwordErrorLable.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
         self.passwordErrorLable.topAnchor.constraint(equalTo: self.stackTextViews.bottomAnchor, constant: 2),
         self.passwordErrorLable.heightAnchor.constraint(equalToConstant: 10)
     ]
     
+    private lazy var emailErrorLable: UILabel = {
+       let lable = UILabel()
+        lable.translatesAutoresizingMaskIntoConstraints = false
+        lable.textColor = .systemRed
+        lable.font = UIFont.systemFont(ofSize: 10.0)
+        lable.text = "Некорректный Email"
+        lable.isHidden = true
+        return lable
+    }()
+    
+    private lazy var emailErrorLableConstraints = [
+        self.emailErrorLable.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+        self.emailErrorLable.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+        self.emailErrorLable.topAnchor.constraint(equalTo: self.stackTextViews.bottomAnchor, constant: 2),
+        self.emailErrorLable.heightAnchor.constraint(equalToConstant: 10)
+    ]
+    
     @objc private func didTapButton(sender: UIButton) {
         self.passwordErrorLable.isHidden = true
+        self.emailErrorLable.isHidden = true
+        
         guard self.emailText != nil,
               self.emailText != "" else {
                   self.isEmptyTextField(self.emailTextField, 0.35)
                   return
               }
+        
         guard self.passwordText != nil,
-              self.passwordText != ""else {
+              self.passwordText != "" else {
                   self.isEmptyTextField(self.passwordTextField, 0.35)
                   return
               }
+        
+        guard emailValidate(for: self.emailText!) else {
+            self.emailErrorLable.isHidden = false
+            return
+        }
+        
         guard self.isValidated(self.passwordText!) else {
             self.passwordErrorLable.isHidden = false
             return
         }
+        
         guard self.emailText == self.standartLogin,
               self.passwordText == self.standertPassword else {
                   self.delegateButtonAlert?.didTapButtonAlert()
                   return
               }
+        
         self.delegateButtonEnter?.didTapButtonEnter()
         self.clearTextField()
     }
     
     private func clearTextField() {
-        emailTextField.text = nil
-        passwordTextField.text = nil
-        emailText = nil
-        passwordText = nil
+        self.emailTextField.text = nil
+        self.passwordTextField.text = nil
+        self.emailText = nil
+        self.passwordText = nil
         self.passwordErrorLable.isHidden = true
+        self.emailErrorLable.isHidden = true
     }
 
     @objc private func emailTextChange(_ textField: UITextField) {

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4D26B9F127EF6D9500AADB76 /* LoginAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26B9F027EF6D9500AADB76 /* LoginAlertController.swift */; };
+		4D26B9F327EF934F00AADB76 /* EmailValidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26B9F227EF934F00AADB76 /* EmailValidate.swift */; };
 		4DBB482527B5165900B4E989 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBB482427B5165900B4E989 /* AppDelegate.swift */; };
 		4DBB482727B5165900B4E989 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBB482627B5165900B4E989 /* SceneDelegate.swift */; };
 		4DBB482E27B5165B00B4E989 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DBB482D27B5165B00B4E989 /* Assets.xcassets */; };
@@ -39,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		4D26B9F027EF6D9500AADB76 /* LoginAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAlertController.swift; sourceTree = "<group>"; };
+		4D26B9F227EF934F00AADB76 /* EmailValidate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidate.swift; sourceTree = "<group>"; };
 		4DBB482127B5165900B4E989 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DBB482427B5165900B4E989 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4DBB482627B5165900B4E989 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 		4DE4C69727C6A2B800FA7E77 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				4D26B9F227EF934F00AADB76 /* EmailValidate.swift */,
 				4DE4C69827C6A2D200FA7E77 /* Models */,
 			);
 			path = Core;
@@ -341,6 +344,7 @@
 				4DE4C69027C61EBD00FA7E77 /* LogInViewController.swift in Sources */,
 				4DF831DB27B7D913005FA36D /* ProfileHeader.swift in Sources */,
 				4DDD35BC27B699F500A5C29B /* FeedViewController.swift in Sources */,
+				4D26B9F327EF934F00AADB76 /* EmailValidate.swift in Sources */,
 				4DBB482727B5165900B4E989 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
