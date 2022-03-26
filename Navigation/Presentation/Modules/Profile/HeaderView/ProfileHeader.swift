@@ -67,9 +67,9 @@ class ProfileHeader: UITableViewHeaderFooterView {
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOpacity = 0.7
         button.layer.masksToBounds = false
-        button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
-        button.addTarget(self, action: #selector(holdTapButton), for: .touchDown)
-        button.addTarget(self, action: #selector(dragExitButton), for: .touchDragExit)
+        button.addTarget(self, action: #selector(self.didTapButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(self.holdTapButton), for: .touchDown)
+        button.addTarget(self, action: #selector(self.dragExitButton), for: .touchDragExit)
         return button
     }()
     

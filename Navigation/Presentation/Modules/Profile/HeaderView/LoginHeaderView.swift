@@ -9,8 +9,11 @@ import UIKit
 
 class LoginHeaderView: UIView, UITextFieldDelegate {
     
-    weak var delegateButton: ButtonPushDelegate?
+    weak var delegateButtonEnter: ButtonPushDelegate?
+    weak var delegateButtonAlert: ButtonAlertDelegate?
     
+    private let standartLogin: String = "kkrasavin@yarz.ru"
+    private let standertPassword: String = "123456"
     private var emailText: String?
     private var passwordText: String?
     
@@ -133,7 +136,7 @@ class LoginHeaderView: UIView, UITextFieldDelegate {
         button.clipsToBounds = true
         button.layer.cornerRadius = 10.0
         button.layer.masksToBounds = true
-        button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(self.didTapButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -166,20 +169,25 @@ class LoginHeaderView: UIView, UITextFieldDelegate {
         self.passwordErrorLable.isHidden = true
         guard self.emailText != nil,
               self.emailText != "" else {
-            self.isEmptyTextField(self.emailTextField, 0.35)
-            return
-        }
+                  self.isEmptyTextField(self.emailTextField, 0.35)
+                  return
+              }
         guard self.passwordText != nil,
               self.passwordText != ""else {
-            self.isEmptyTextField(self.passwordTextField, 0.35)
-            return
-        }
+                  self.isEmptyTextField(self.passwordTextField, 0.35)
+                  return
+              }
         guard self.isValidated(self.passwordText!) else {
             self.passwordErrorLable.isHidden = false
             return
         }
-        delegateButton?.didTapButton()
-        clearTextField()
+        guard self.emailText == self.standartLogin,
+              self.passwordText == self.standertPassword else {
+                  self.delegateButtonAlert?.didTapButtonAlert()
+                  return
+              }
+        self.delegateButtonEnter?.didTapButtonEnter()
+        self.clearTextField()
     }
     
     private func clearTextField() {
@@ -191,15 +199,11 @@ class LoginHeaderView: UIView, UITextFieldDelegate {
     }
 
     @objc private func emailTextChange(_ textField: UITextField) {
-//        if let text = textField.text {
         self.emailText = textField.text
-//        }
     }
 
     @objc private func passwordTextChange(_ textField: UITextField) {
-//        if let text = textField.text {
         self.passwordText = textField.text
-//        }
     }
     
     private func isEmptyTextField(_ viewToAnimate: UIView, _ duration: TimeInterval) {

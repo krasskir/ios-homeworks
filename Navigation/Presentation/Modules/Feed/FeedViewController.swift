@@ -19,7 +19,7 @@ class FeedViewController: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.clipsToBounds = true
         button.layer.cornerRadius = 12
-        button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(self.didTapButton), for: .touchUpInside)
         return button
     }()
 

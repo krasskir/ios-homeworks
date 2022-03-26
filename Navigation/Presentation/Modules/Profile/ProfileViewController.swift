@@ -123,7 +123,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension ProfileViewController: ButtonPushDelegate {
-    func didTapButton() {
+    func didTapButtonEnter() {
         let photos = PhotosViewController()
         self.navigationController?.pushViewController(photos, animated: true)
     }

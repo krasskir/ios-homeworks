@@ -36,7 +36,8 @@ class LogInViewController: UIViewController {
         self.view.backgroundColor = .white
         self.view.addSubview(self.scrollView)
         self.scrollView.addSubview(self.loginHeaderView)
-        self.loginHeaderView.delegateButton = self
+        self.loginHeaderView.delegateButtonEnter = self
+        self.loginHeaderView.delegateButtonAlert = self
     }
     
     private lazy var loginHeaderView: LoginHeaderView = {
@@ -105,8 +106,15 @@ class LogInViewController: UIViewController {
 }
 
 extension LogInViewController: ButtonPushDelegate {
-    func didTapButton() {
+    func didTapButtonEnter() {
         let profile = ProfileViewController()
         self.navigationController?.pushViewController(profile, animated: true)
+    }
+}
+
+extension LogInViewController: ButtonAlertDelegate {
+    func didTapButtonAlert() {
+        let alertView = LoginAlertController()
+        self.present(alertView, animated: true, completion: nil)
     }
 }

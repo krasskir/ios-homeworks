@@ -162,7 +162,7 @@ class PhotosTableViewCell: UITableViewCell {
     ]
     
     @objc func moveToPhotos(_ sender: UITapGestureRecognizer){
-        delegateButton?.didTapButton()
+        delegateButton?.didTapButtonEnter()
     }
 }
 

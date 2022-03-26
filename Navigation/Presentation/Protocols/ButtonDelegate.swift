@@ -8,5 +8,9 @@
 import Foundation
 
 protocol ButtonPushDelegate: AnyObject {
-    func didTapButton()
+    func didTapButtonEnter()
+}
+
+protocol ButtonAlertDelegate: AnyObject {
+    func didTapButtonAlert()
 }
