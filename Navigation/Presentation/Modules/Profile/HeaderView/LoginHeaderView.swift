@@ -13,7 +13,7 @@ class LoginHeaderView: UIView, UITextFieldDelegate {
     weak var delegateButtonAlert: ButtonAlertDelegate?
     
     private let standartLogin: String = "kkrasavin@yarz.ru"
-    private let standertPassword: String = "123456"
+    private let standertPassword: String = "12345678"
     private var emailText: String?
     private var passwordText: String?
     
