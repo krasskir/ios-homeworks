@@ -25,7 +25,7 @@
 		4DE4C69227C6215E00FA7E77 /* LoginHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE4C69127C6215D00FA7E77 /* LoginHeaderView.swift */; };
 		4DE4C69D27C6A37400FA7E77 /* UIColorFromHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE4C69C27C6A37400FA7E77 /* UIColorFromHex.swift */; };
 		4DE4C69F27C6A3A400FA7E77 /* UIImageAlphaChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE4C69E27C6A3A400FA7E77 /* UIImageAlphaChange.swift */; };
-		4DE4C6A427C6A6E200FA7E77 /* ButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE4C6A327C6A6E200FA7E77 /* ButtonDelegate.swift */; };
+		4DE4C6A427C6A6E200FA7E77 /* Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE4C6A327C6A6E200FA7E77 /* Delegate.swift */; };
 		4DE4C6A827C6CE3C00FA7E77 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE4C6A727C6CE3C00FA7E77 /* PostTableViewCell.swift */; };
 		4DE4C6AA27C6CED900FA7E77 /* Setupable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE4C6A927C6CED900FA7E77 /* Setupable.swift */; };
 		4DE4C6AC27C7FB3700FA7E77 /* testPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE4C6AB27C7FB3700FA7E77 /* testPosts.swift */; };
@@ -60,7 +60,7 @@
 		4DE4C69127C6215D00FA7E77 /* LoginHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeaderView.swift; sourceTree = "<group>"; };
 		4DE4C69C27C6A37400FA7E77 /* UIColorFromHex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorFromHex.swift; sourceTree = "<group>"; };
 		4DE4C69E27C6A3A400FA7E77 /* UIImageAlphaChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageAlphaChange.swift; sourceTree = "<group>"; };
-		4DE4C6A327C6A6E200FA7E77 /* ButtonDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonDelegate.swift; sourceTree = "<group>"; };
+		4DE4C6A327C6A6E200FA7E77 /* Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delegate.swift; sourceTree = "<group>"; };
 		4DE4C6A727C6CE3C00FA7E77 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		4DE4C6A927C6CED900FA7E77 /* Setupable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setupable.swift; sourceTree = "<group>"; };
 		4DE4C6AB27C7FB3700FA7E77 /* testPosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testPosts.swift; sourceTree = "<group>"; };
@@ -214,7 +214,7 @@
 		4DE4C6A227C6A69400FA7E77 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				4DE4C6A327C6A6E200FA7E77 /* ButtonDelegate.swift */,
+				4DE4C6A327C6A6E200FA7E77 /* Delegate.swift */,
 				4DE4C6A927C6CED900FA7E77 /* Setupable.swift */,
 			);
 			path = Protocols;
@@ -324,7 +324,7 @@
 			files = (
 				4DE5ACBD27C9122B00471282 /* PhotosTableViewCell.swift in Sources */,
 				4D26B9F527F0690700AADB76 /* EmptyTextField.swift in Sources */,
-				4DE4C6A427C6A6E200FA7E77 /* ButtonDelegate.swift in Sources */,
+				4DE4C6A427C6A6E200FA7E77 /* Delegate.swift in Sources */,
 				4DF831E227BBFD14005FA36D /* HideKeyboard.swift in Sources */,
 				4DE5ACC727CA79DD00471282 /* GestureViewController.swift in Sources */,
 				4DE4C6A827C6CE3C00FA7E77 /* PostTableViewCell.swift in Sources */,

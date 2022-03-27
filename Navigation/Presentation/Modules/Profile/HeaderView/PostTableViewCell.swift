@@ -94,6 +94,31 @@ class PostTableViewCell: UITableViewCell {
         return lable
     }()
     
+    private lazy var likesCount: UILabel = {
+        let lable = UILabel()
+        lable.font = .systemFont(ofSize: 16)
+        lable.textColor = .black
+        lable.translatesAutoresizingMaskIntoConstraints = false
+        return lable
+    }()
+    
+    private lazy var viewsCount: UILabel = {
+        let lable = UILabel()
+        lable.font = .systemFont(ofSize: 16)
+        lable.textColor = .black
+        lable.translatesAutoresizingMaskIntoConstraints = false
+        return lable
+    }()
+    
+    private lazy var spaceLable: UILabel = {
+        let lable = UILabel()
+        lable.font = .systemFont(ofSize: 16)
+        lable.textColor = .black
+        lable.text = "                                      "
+        lable.translatesAutoresizingMaskIntoConstraints = false
+        return lable
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.setupView()
@@ -117,9 +142,16 @@ class PostTableViewCell: UITableViewCell {
         self.stackView.addArrangedSubview(self.postText)
         self.stackView.addArrangedSubview(self.subStackView)
         self.subStackView.addArrangedSubview(self.likes)
+        self.subStackView.addArrangedSubview(self.likesCount)
+        self.subStackView.addArrangedSubview(self.spaceLable)
         self.subStackView.addArrangedSubview(self.views)
+        self.subStackView.addArrangedSubview(self.viewsCount)
         
         self.setupConstraints()
+        
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(likesUp))
+        self.likes.isUserInteractionEnabled = true
+        self.likes.addGestureRecognizer(gesture)
     }
     
     private func setupConstraints() {
@@ -155,6 +187,19 @@ class PostTableViewCell: UITableViewCell {
         self.stackView.leadingAnchor.constraint(equalTo: self.backView.leadingAnchor, constant: 16),
         self.stackView.trailingAnchor.constraint(equalTo: self.backView.trailingAnchor, constant: -16)
     ]
+    
+    @objc func likesUp(_ sender: UITapGestureRecognizer){
+        self.likesCount.text = addLike(self.likesCount.text)
+    }
+    
+    private func addLike(_ likeCount: String?) -> String {
+        if var likes = Int(likeCount ?? "") {
+            likes += 1
+            return String(likes)
+        } else {
+            return ""
+        }
+    }
 }
 
 extension PostTableViewCell: PostSetupable {
@@ -163,8 +208,10 @@ extension PostTableViewCell: PostSetupable {
         self.titlePost.text = viewModel.title
         self.postImage.image = UIImage(named: viewModel.image)
         self.postText.text = viewModel.description
-        self.likes.text = "Likes: " + String(viewModel.likes)
-        self.views.text = "Views: " + String(viewModel.views)
+        self.likes.text = "Likes:"
+        self.likesCount.text = String(viewModel.likes)
+        self.views.text = "Views:"
+        self.viewsCount.text = String(viewModel.views)
         self.author = viewModel.author
     }
 }
