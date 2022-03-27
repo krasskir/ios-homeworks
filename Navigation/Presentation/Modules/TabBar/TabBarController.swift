@@ -49,7 +49,7 @@ class TabBarController: UITabBarController {
         self.viewControllers = items.map( { TabBarItem in
             switch TabBarItem {
             case .feed:
-                return UINavigationController(rootViewController: FeedViewController())
+                return UINavigationController(rootViewController: ProfileViewController())
             case .profile:
                 return UINavigationController(rootViewController: LogInViewController())
             case .gestures:

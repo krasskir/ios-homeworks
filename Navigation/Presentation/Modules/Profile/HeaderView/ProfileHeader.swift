@@ -18,7 +18,6 @@ class ProfileHeader: UITableViewHeaderFooterView {
         self.setupView()
     }
     
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -30,6 +29,7 @@ class ProfileHeader: UITableViewHeaderFooterView {
         self.backView.addSubview(self.nameLable)
         self.backView.addSubview(self.statusLable)
         self.backView.addSubview(self.statusText)
+        self.backView.addSubview(self.statusErrorLable)
         
         self.constraintsSet()
     }
@@ -154,21 +154,40 @@ class ProfileHeader: UITableViewHeaderFooterView {
         self.statusText.heightAnchor.constraint(equalToConstant: 40)
     ]
     
+    private lazy var statusErrorLable: UILabel = {
+       let lable = UILabel()
+        lable.translatesAutoresizingMaskIntoConstraints = false
+        lable.textColor = .systemRed
+        lable.font = UIFont.systemFont(ofSize: 10.0)
+        lable.text = "Нельзя установить пустой статус"
+        lable.textAlignment = .right
+        lable.isHidden = true
+        return lable
+    }()
+    
+    private lazy var statusErrorLableConstraints = [
+        self.statusErrorLable.leadingAnchor.constraint(equalTo: self.backView.leadingAnchor, constant: 26),
+        self.statusErrorLable.trailingAnchor.constraint(equalTo: self.backView.trailingAnchor, constant: -26),
+        self.statusErrorLable.bottomAnchor.constraint(equalTo: self.statusText.topAnchor, constant: -2),
+        self.statusErrorLable.heightAnchor.constraint(equalToConstant: 10)
+    ]
+    
     private func constraintsSet() {
-        NSLayoutConstraint.activate(constraintsButton)
-        NSLayoutConstraint.activate(constraintsPhoto)
-        NSLayoutConstraint.activate(constraintsNameLable)
-        NSLayoutConstraint.activate(constraintsStatusText)
-        NSLayoutConstraint.activate(constraintsStatusLable)
-        NSLayoutConstraint.activate(backViewConstraints)
+        NSLayoutConstraint.activate(self.constraintsButton)
+        NSLayoutConstraint.activate(self.constraintsPhoto)
+        NSLayoutConstraint.activate(self.constraintsNameLable)
+        NSLayoutConstraint.activate(self.constraintsStatusText)
+        NSLayoutConstraint.activate(self.constraintsStatusLable)
+        NSLayoutConstraint.activate(self.backViewConstraints)
+        NSLayoutConstraint.activate(self.statusErrorLableConstraints)
     }
     
     @objc private func didTapButton(sender: UIButton) {
         self.animateTap(sender, 0.85)
         if statusText.isHidden {
-            didHideTextField()
+            self.didHideTextField()
         } else {
-            willHideTextField()
+            self.willHideTextField()
         }
     }
     
@@ -184,12 +203,21 @@ class ProfileHeader: UITableViewHeaderFooterView {
     }
     
     private func willHideTextField() {
+        guard self.currentStatus != nil,
+              spaceValidate(string: self.currentStatus!),
+              self.currentStatus != "" else {
+                  self.statusErrorLable.isHidden = false
+                  isEmptyTextField(self.statusText, 0.35)
+                  return
+              }
+        
         self.statusText.isHidden.toggle()
         self.constraintsButton[0].constant = 16
         self.constraintsStatusLable[0].constant = -34
-        self.statusLable.text = currentStatus
+        self.statusLable.text = self.currentStatus
         self.statusText.text = ""
         self.currentStatus = nil
+        self.statusErrorLable.isHidden = true
         self.button.setTitle("Изменить статус", for: .normal)
         UIView.animate(withDuration: 0.45) {
             self.layoutIfNeeded()
