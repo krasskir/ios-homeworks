@@ -11,9 +11,10 @@ class PostZoomViewController: UIViewController {
     
     weak var postCell: PostTableViewCell?
     
+    private let cellHeight: CGFloat = 600
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setNavigationBar()
         self.setupView()
         self.setConstraints()
         self.postTableViewZoom.reloadData()
@@ -27,11 +28,6 @@ class PostZoomViewController: UIViewController {
     private func setupView() {
         self.view.backgroundColor = .systemGroupedBackground
         self.view.addSubview(self.postTableViewZoom)
-    }
-    
-    private func setNavigationBar() {
-        self.navigationItem.backButtonTitle = "Назад"
-        self.navigationController?.navigationBar.isHidden = false
     }
     
     private func setConstraints() {
@@ -63,8 +59,8 @@ class PostZoomViewController: UIViewController {
         self.postTableViewZoom.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
     ]
     
-    private func setHeaderHeight() -> CGFloat {
-        return (self.postTableViewZoom.bounds.size.height - 600) / 2
+    private func setHeaderHeight(with cellHeight: CGFloat) -> CGFloat {
+        return (self.postTableViewZoom.bounds.size.height - cellHeight) / 2
     }
 }
 
@@ -88,17 +84,17 @@ extension PostZoomViewController: UITableViewDelegate, UITableViewDataSource {
         let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "DefaultHeader")
         return view
     }
-    
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return self.setHeaderHeight() >= 0 ? self.setHeaderHeight() : 0
+        return self.setHeaderHeight(with: cellHeight) >= 0 ? self.setHeaderHeight(with: cellHeight) : 0
     }
-    
+
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "DefaultHeader")
         return view
     }
-    
+
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return self.setHeaderHeight() >= 0 ? self.setHeaderHeight() : 0
+        return self.setHeaderHeight(with: cellHeight) >= 0 ? self.setHeaderHeight(with: cellHeight) : 0
     }
 }

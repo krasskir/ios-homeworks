@@ -126,6 +126,18 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return section == 0 ? 230 : 10
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
+    -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .normal, title: nil) { (action, view, completion) in
+            completion(true)
+        }
+        self.dataSourcePost.remove(at: indexPath.row)
+        self.postTableView.deleteRows(at: [indexPath], with: .automatic)
+        self.postTableView.reloadData()
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        return configuration
+    }
 }
 
 extension ProfileViewController: ButtonPushDelegate {

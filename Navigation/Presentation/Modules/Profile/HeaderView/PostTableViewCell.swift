@@ -141,8 +141,8 @@ class PostTableViewCell: UITableViewCell {
         self.contentView.backgroundColor = .white
 
         self.contentView.addSubview(self.backView)
-        self.stackView.addSubview(self.titlePost)
-        self.stackView.addSubview(self.postImage)
+        self.backView.addSubview(self.titlePost)
+        self.backView.addSubview(self.postImage)
         self.backView.addSubview(self.stackView)
         self.stackView.addArrangedSubview(self.postText)
         self.stackView.addArrangedSubview(self.subStackView)
@@ -159,8 +159,8 @@ class PostTableViewCell: UITableViewCell {
         self.likes.addGestureRecognizer(likeGesture)
         
         let cellGesture = UITapGestureRecognizer(target: self, action: #selector(self.postZooming))
-        self.contentView.isUserInteractionEnabled = true
-        self.contentView.addGestureRecognizer(cellGesture)
+        self.postImage.isUserInteractionEnabled = true
+        self.postImage.addGestureRecognizer(cellGesture)
     }
     
     private func setupConstraints() {
@@ -198,20 +198,21 @@ class PostTableViewCell: UITableViewCell {
     ]
     
     @objc func likesUp(_ sender: UITapGestureRecognizer){
-        self.likesCount.text = self.addLike(self.likesCount.text)
+        self.likesCount.text = self.add(self.likesCount.text)
     }
     
-    private func addLike(_ likeCount: String?) -> String {
-        if var likes = Int(likeCount ?? "") {
-            likes += 1
-            return String(likes)
+    private func add(_ count: String?) -> String {
+        if var countAdd = Int(count ?? "") {
+            countAdd += 1
+            return String(countAdd)
         } else {
             return ""
         }
     }
     
     @objc func postZooming(_ sender: UITapGestureRecognizer){
-        delegateButton?.didTapCell(for: id)
+        delegateButton?.didTapCell(for: self.id)
+        self.viewsCount.text = self.add(self.viewsCount.text)
     }
 }
 
