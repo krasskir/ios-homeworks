@@ -22,9 +22,14 @@ class ProfileViewController: UIViewController {
         self.setConstraints()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.postTableView.reloadData()
+    }
+    
     private func setupView() {
         self.view.backgroundColor = .systemGroupedBackground
-        self.view.addSubview(postTableView)
+        self.view.addSubview(self.postTableView)
     }
     
     private func setNavigationBar() {
@@ -33,7 +38,7 @@ class ProfileViewController: UIViewController {
     }
     
     private func setConstraints() {
-        NSLayoutConstraint.activate(tableViewConstraints)
+        NSLayoutConstraint.activate(self.tableViewConstraints)
     }
     
     private lazy var postTableView: UITableView = {
@@ -93,13 +98,14 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 return cell
             }
             var post = self.dataSourcePost[indexPath.row]
-            let viewModel = PostTableViewCell.PostCell(title: post.title,
+            let viewModel = PostTableViewCell.PostCell(id: indexPath.row, title: post.title,
                                                         author: post.author,
                                                         image: post.image,
                                                         description: post.discription,
                                                         views: post.views,
                                                         likes: post.likes)
             cell.setup(with: viewModel)
+            cell.delegateButton = self
             return cell
         }
     }
@@ -126,5 +132,13 @@ extension ProfileViewController: ButtonPushDelegate {
     func didTapButtonEnter() {
         let photos = PhotosViewController()
         self.navigationController?.pushViewController(photos, animated: true)
+    }
+}
+
+extension ProfileViewController: CellPushDelegate {
+    func didTapCell(for postID: Int) {
+        let postZoom = PostZoomViewController()
+        postZoom.postCell = self.postTableView.cellForRow(at: IndexPath(row: postID, section: 1)) as? PostTableViewCell
+        self.present(postZoom, animated: true, completion: nil)
     }
 }

@@ -8,8 +8,13 @@
 import UIKit
 
 class PostTableViewCell: UITableViewCell {
+    
+    weak var delegateButton: CellPushDelegate?
+    
+    private var id: Int = 0
 
     struct PostCell: PostViewCellProtocol {
+        var id: Int
         var title: String
         var author: String
         var image: String
@@ -149,9 +154,13 @@ class PostTableViewCell: UITableViewCell {
         
         self.setupConstraints()
         
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(likesUp))
+        let likeGesture = UITapGestureRecognizer(target: self, action: #selector(likesUp))
         self.likes.isUserInteractionEnabled = true
-        self.likes.addGestureRecognizer(gesture)
+        self.likes.addGestureRecognizer(likeGesture)
+        
+        let cellGesture = UITapGestureRecognizer(target: self, action: #selector(self.postZooming))
+        self.contentView.isUserInteractionEnabled = true
+        self.contentView.addGestureRecognizer(cellGesture)
     }
     
     private func setupConstraints() {
@@ -189,7 +198,7 @@ class PostTableViewCell: UITableViewCell {
     ]
     
     @objc func likesUp(_ sender: UITapGestureRecognizer){
-        self.likesCount.text = addLike(self.likesCount.text)
+        self.likesCount.text = self.addLike(self.likesCount.text)
     }
     
     private func addLike(_ likeCount: String?) -> String {
@@ -200,11 +209,16 @@ class PostTableViewCell: UITableViewCell {
             return ""
         }
     }
+    
+    @objc func postZooming(_ sender: UITapGestureRecognizer){
+        delegateButton?.didTapCell(for: id)
+    }
 }
 
 extension PostTableViewCell: PostSetupable {
     func setup(with viewModel: PostViewCellProtocol) {
         guard let viewModel = viewModel as? PostCell else { return }
+        self.id = viewModel.id
         self.titlePost.text = viewModel.title
         self.postImage.image = UIImage(named: viewModel.image)
         self.postText.text = viewModel.description

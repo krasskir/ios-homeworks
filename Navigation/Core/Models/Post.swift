@@ -10,6 +10,7 @@ import UIKit
 struct Post {
     private let randomInt = Int.random(in: 10...10000)
     
+    var id: Int
     let title: String
     let author: String
     let discription: String
