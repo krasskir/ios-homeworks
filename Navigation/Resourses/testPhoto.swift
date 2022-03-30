@@ -9,8 +9,12 @@ import Foundation
 
 var testPhotoArray: [String] = {
     var array: [String] = []
-    for _ in 0...20 {
+    for _ in 0...10 {
         array.append("cat")
+        array.append("tired")
+        array.append("wife")
+        array.append("child")
+        array.append("job")
     }
     return array
 }()

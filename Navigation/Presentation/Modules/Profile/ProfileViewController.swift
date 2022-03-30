@@ -134,7 +134,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         }
         self.dataSourcePost.remove(at: indexPath.row)
         self.postTableView.deleteRows(at: [indexPath], with: .automatic)
-        self.postTableView.reloadData()
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
         return configuration
     }
@@ -148,9 +147,9 @@ extension ProfileViewController: ButtonPushDelegate {
 }
 
 extension ProfileViewController: CellPushDelegate {
-    func didTapCell(for postID: Int) {
+    func didTapCell(for id: Int) {
         let postZoom = PostZoomViewController()
-        postZoom.postCell = self.postTableView.cellForRow(at: IndexPath(row: postID, section: 1)) as? PostTableViewCell
+        postZoom.postCell = self.postTableView.cellForRow(at: IndexPath(row: id, section: 1)) as? PostTableViewCell
         self.present(postZoom, animated: true, completion: nil)
     }
 }

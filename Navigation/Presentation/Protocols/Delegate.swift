@@ -16,5 +16,5 @@ protocol ButtonAlertDelegate: AnyObject {
 }
 
 protocol CellPushDelegate: AnyObject {
-    func didTapCell(for postID: Int)
+    func didTapCell(for id: Int)
 }

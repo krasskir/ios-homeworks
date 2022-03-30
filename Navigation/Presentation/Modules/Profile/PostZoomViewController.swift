@@ -71,6 +71,7 @@ extension PostZoomViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath)
         cell.backgroundColor = .black
         if let post = postCell {
