@@ -24,7 +24,6 @@ class ProfileViewController: UIViewController {
         self.setConstraints()
     }
 
-    
     private func setupView() {
         self.view.backgroundColor = .systemGroupedBackground
         self.view.addSubview(self.postTableView)
@@ -147,7 +146,7 @@ extension ProfileViewController: ButtonPushDelegate {
 extension ProfileViewController: CellPushDelegate {
     func didTapCell(for id: Int) {
         let height = self.cellHeight
-        let view = (self.postTableView.cellForRow(at: IndexPath(row: id, section: 1)) as? PostTableViewCell)?.contentView
+        let view = (self.postTableView.cellForRow(at: IndexPath(row: id, section: 1)) as? PostTableViewCell)?.contentView.snapshotView(afterScreenUpdates: false)
         let post = ZoomViewController()
         if view != nil {
             post.setupView(for: view!, with: height)
