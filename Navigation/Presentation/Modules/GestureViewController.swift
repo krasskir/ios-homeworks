@@ -262,12 +262,13 @@ class GestureViewController: UIViewController {
         self.heightPhoto?.constant = avatarLenght
         self.widthPhoto?.constant = avatarLenght
         
+        self.cancelButton.isHidden.toggle()
+        
         UIView.animate(withDuration: 0.5) {
             self.photo.layer.cornerRadius = 100 / 2
             self.view.layoutIfNeeded()
         } completion: { _ in
             self.photo.layer.borderWidth = 3.0
-            self.cancelButton.isHidden.toggle()
             self.isExpanded.toggle()
             
             UIView.animate(withDuration: 0.3) {

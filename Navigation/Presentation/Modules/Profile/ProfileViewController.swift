@@ -9,6 +9,8 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
+    private let cellHeight: CGFloat = 600
+    
     private var dataSourcePost: [Post] = []
     private var dataSourcePhoto: [String] = []
     
@@ -21,11 +23,7 @@ class ProfileViewController: UIViewController {
         self.setupView()
         self.setConstraints()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.postTableView.reloadData()
-    }
+
     
     private func setupView() {
         self.view.backgroundColor = .systemGroupedBackground
@@ -148,8 +146,12 @@ extension ProfileViewController: ButtonPushDelegate {
 
 extension ProfileViewController: CellPushDelegate {
     func didTapCell(for id: Int) {
-        let postZoom = PostZoomViewController()
-        postZoom.postCell = self.postTableView.cellForRow(at: IndexPath(row: id, section: 1)) as? PostTableViewCell
-        self.present(postZoom, animated: true, completion: nil)
+        let height = self.cellHeight
+        let view = (self.postTableView.cellForRow(at: IndexPath(row: id, section: 1)) as? PostTableViewCell)?.contentView
+        let post = ZoomViewController()
+        if view != nil {
+            post.setupView(for: view!, with: height)
+            self.present(post, animated: true, completion: nil)
+        }
     }
 }
