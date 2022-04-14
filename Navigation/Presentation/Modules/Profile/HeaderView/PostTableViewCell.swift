@@ -211,8 +211,8 @@ class PostTableViewCell: UITableViewCell {
     }
     
     @objc func postZooming(_ sender: UITapGestureRecognizer){
-        delegateButton?.didTapCell(for: self.id)
         self.viewsCount.text = self.add(self.viewsCount.text)
+        self.delegateButton?.didTapCell(for: self.id)
     }
 }
 

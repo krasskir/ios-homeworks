@@ -149,7 +149,7 @@ extension ProfileViewController: ButtonPushDelegate {
 extension ProfileViewController: CellPushDelegate {
     func didTapCell(for id: Int) {
         let height = self.cellHeight
-        let view = (self.postTableView.cellForRow(at: IndexPath(row: id, section: 1)) as? PostTableViewCell)?.contentView.snapshotView(afterScreenUpdates: false)
+        let view = (self.postTableView.cellForRow(at: IndexPath(row: id, section: 1)) as? PostTableViewCell)?.contentView.snapshotView(afterScreenUpdates: true)
         let post = ZoomViewController()
         if view != nil {
             post.setupView(for: view!, with: height)
