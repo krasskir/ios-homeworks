@@ -16,33 +16,6 @@ class PhotosViewController: UIViewController {
     private var widthPhoto: NSLayoutConstraint?
     private var isExpanded: Bool = false
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.dataSourcePhoto = testPhotoArray
-        self.setupView()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.navigationController?.navigationBar.isHidden = true
-    }
-    
-    private func setupView() {
-        self.view.backgroundColor = .white
-        self.navigationController?.navigationBar.isHidden = false
-        self.navigationItem.title = "Фото галерея"
-        self.view.addSubview(self.collection)
-        self.view.addSubview(self.darkView)
-        self.view.addSubview(self.cancelButton)
-        self.view.addSubview(self.photo)
-        self.setConstraints()
-        self.setPhotoConstraints()
-        
-        self.view.insertSubview(self.darkView, aboveSubview: self.collection)
-        self.view.insertSubview(self.cancelButton, aboveSubview: self.darkView)
-        self.view.insertSubview(self.photo, aboveSubview: self.darkView)
-    }
-    
     private lazy var layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -74,11 +47,6 @@ class PhotosViewController: UIViewController {
         self.collection.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -8),
         self.collection.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -8)
     ]
-    
-    private func itemCollectionSize(for widht: CGFloat, with spacing: CGFloat) -> CGSize {
-        let neededWidht = (widht - 2 * spacing) / 3
-        return CGSize(width: neededWidht, height: neededWidht)
-    }
     
     private lazy var darkView: UIView = {
         let view = UIView()
@@ -129,6 +97,38 @@ class PhotosViewController: UIViewController {
         self.cancelButton.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -5),
         self.cancelButton.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 5)
     ]
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.dataSourcePhoto = testPhotoArray
+        self.setupView()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
+    private func setupView() {
+        self.view.backgroundColor = .white
+        self.navigationController?.navigationBar.isHidden = false
+        self.navigationItem.title = "Фото галерея"
+        self.view.addSubview(self.collection)
+        self.view.addSubview(self.darkView)
+        self.view.addSubview(self.cancelButton)
+        self.view.addSubview(self.photo)
+        self.setConstraints()
+        self.setPhotoConstraints()
+        
+        self.view.insertSubview(self.darkView, aboveSubview: self.collection)
+        self.view.insertSubview(self.cancelButton, aboveSubview: self.darkView)
+        self.view.insertSubview(self.photo, aboveSubview: self.darkView)
+    }
+    
+    private func itemCollectionSize(for widht: CGFloat, with spacing: CGFloat) -> CGSize {
+        let neededWidht = (widht - 2 * spacing) / 3
+        return CGSize(width: neededWidht, height: neededWidht)
+    }
     
     private func setPhotoConstraints() {
         self.heightPhoto = self.photo.heightAnchor.constraint(equalToConstant: self.avatarLenght)

@@ -26,6 +26,13 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
+    private lazy var imageConstraints = [
+        self.image.topAnchor.constraint(equalTo: self.contentView.topAnchor),
+        self.image.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
+        self.image.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+        self.image.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
+    ]
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setupView()
@@ -50,13 +57,6 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         NSLayoutConstraint.activate(self.imageConstraints)
     }
 
-    private lazy var imageConstraints = [
-        self.image.topAnchor.constraint(equalTo: self.contentView.topAnchor),
-        self.image.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
-        self.image.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
-        self.image.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
-    ]
-    
     @objc func postZooming(_ sender: UITapGestureRecognizer){
         self.cellPushDelegate?.didTapCell(for: self.id)
     }

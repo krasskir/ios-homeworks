@@ -12,13 +12,6 @@ class ZoomViewController: UIViewController {
     private var centerView: UIView!
     private var heightHeaderFooter: CGFloat!
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor = .systemGroupedBackground
-        
-        self.view.addSubview(self.backView)
-    }
-    
     private lazy var backView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemGroupedBackground
@@ -32,6 +25,13 @@ class ZoomViewController: UIViewController {
         self.backView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
         self.backView.heightAnchor.constraint(equalToConstant: self.heightHeaderFooter)
     ]
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.backgroundColor = .systemGroupedBackground
+        
+        self.view.addSubview(self.backView)
+    }
     
     func setupView(for view: UIView, with height: CGFloat) {
         self.centerView = view

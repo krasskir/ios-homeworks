@@ -9,6 +9,38 @@ import UIKit
 
 class LogInViewController: UIViewController {
     
+    private lazy var loginHeaderView: LoginHeaderView = {
+        let view = LoginHeaderView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private lazy var loginViewConstraints = [
+        self.loginHeaderView.topAnchor.constraint(equalTo: self.scrollView.topAnchor),
+        self.loginHeaderView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor),
+        self.loginHeaderView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+        self.loginHeaderView.heightAnchor.constraint(equalToConstant: 780)
+    ]
+    
+    private var scrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.backgroundColor = .white
+        scroll.translatesAutoresizingMaskIntoConstraints = false
+        return scroll
+    }()
+    
+    private lazy var scrollViewConstraints = [
+        self.scrollView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+        self.scrollView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
+        self.scrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+        self.scrollView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+    ]
+
+    private func setConstraints() {
+        NSLayoutConstraint.activate(scrollViewConstraints)
+        NSLayoutConstraint.activate(loginViewConstraints)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
@@ -39,43 +71,12 @@ class LogInViewController: UIViewController {
         self.loginHeaderView.delegateButtonEnter = self
         self.loginHeaderView.delegateButtonAlert = self
     }
-    
-    private lazy var loginHeaderView: LoginHeaderView = {
-        let view = LoginHeaderView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private lazy var loginViewConstraints = [
-        self.loginHeaderView.topAnchor.constraint(equalTo: self.scrollView.topAnchor),
-        self.loginHeaderView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor),
-        self.loginHeaderView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-        self.loginHeaderView.heightAnchor.constraint(equalToConstant: 780)
-    ]
-    
-    private var scrollView: UIScrollView = {
-        let scroll = UIScrollView()
-        scroll.backgroundColor = .white
-        scroll.translatesAutoresizingMaskIntoConstraints = false
-        return scroll
-    }()
-    
-    private lazy var scrollViewConstraints = [
-        self.scrollView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
-        self.scrollView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
-        self.scrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-        self.scrollView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
-    ]
-    
+
     private func setNavigationBar() {
         self.navigationItem.backButtonTitle = "Назад"
         self.navigationController?.navigationBar.isHidden = true
     }
 
-    private func setConstraints() {
-        NSLayoutConstraint.activate(scrollViewConstraints)
-        NSLayoutConstraint.activate(loginViewConstraints)
-    }
     
     private func setScrollViewOffset(_ offset: CGPoint) {
         self.scrollView.setContentOffset(offset, animated: true)

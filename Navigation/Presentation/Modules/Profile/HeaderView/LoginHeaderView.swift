@@ -19,37 +19,6 @@ class LoginHeaderView: UIView, UITextFieldDelegate {
     
     private let colorSet = UIColor(hex: "#4885CC")
     
-    override init(frame: CGRect) {
-        super.init(frame: .zero)
-        self.setupView()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setupView() {
-        self.backgroundColor = .white
-        
-        self.addSubview(self.logoView)
-        self.stackTextViews.addArrangedSubview(self.emailTextField)
-        self.stackTextViews.addArrangedSubview(self.passwordTextField)
-        self.addSubview(self.stackTextViews)
-        self.addSubview(self.button)
-        self.addSubview(self.passwordErrorLable)
-        self.addSubview(self.emailErrorLable)
-        
-        self.constraintsSet()
-    }
-    
-    private func constraintsSet() {
-        NSLayoutConstraint.activate(self.logoViewConstraints)
-        NSLayoutConstraint.activate(self.stackTextViewsConstraints)
-        NSLayoutConstraint.activate(self.buttonConstraints)
-        NSLayoutConstraint.activate(self.passwordErrorLableConstraints)
-        NSLayoutConstraint.activate(self.emailErrorLableConstraints)
-    }
-    
     private lazy var logoView: UIImageView = {
         let logo = UIImage(named: "logo.png")
         let logoView = UIImageView()
@@ -184,6 +153,37 @@ class LoginHeaderView: UIView, UITextFieldDelegate {
         self.emailErrorLable.heightAnchor.constraint(equalToConstant: 10)
     ]
     
+    override init(frame: CGRect) {
+        super.init(frame: .zero)
+        self.setupView()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupView() {
+        self.backgroundColor = .white
+        
+        self.addSubview(self.logoView)
+        self.stackTextViews.addArrangedSubview(self.emailTextField)
+        self.stackTextViews.addArrangedSubview(self.passwordTextField)
+        self.addSubview(self.stackTextViews)
+        self.addSubview(self.button)
+        self.addSubview(self.passwordErrorLable)
+        self.addSubview(self.emailErrorLable)
+        
+        self.constraintsSet()
+    }
+    
+    private func constraintsSet() {
+        NSLayoutConstraint.activate(self.logoViewConstraints)
+        NSLayoutConstraint.activate(self.stackTextViewsConstraints)
+        NSLayoutConstraint.activate(self.buttonConstraints)
+        NSLayoutConstraint.activate(self.passwordErrorLableConstraints)
+        NSLayoutConstraint.activate(self.emailErrorLableConstraints)
+    }
+
     @objc private func didTapButton(sender: UIButton) {
         self.passwordErrorLable.isHidden = true
         self.emailErrorLable.isHidden = true

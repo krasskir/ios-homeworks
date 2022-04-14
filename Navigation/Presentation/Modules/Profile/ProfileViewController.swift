@@ -14,30 +14,6 @@ class ProfileViewController: UIViewController {
     private var dataSourcePost: [Post] = []
     private var dataSourcePhoto: [String] = []
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.dataSourcePost = testPostArray
-        self.dataSourcePhoto = Array(testPhotoArray.prefix(4))
-        self.hideKeyboardWhenTappedAround()
-        self.setNavigationBar()
-        self.setupView()
-        self.setConstraints()
-    }
-
-    private func setupView() {
-        self.view.backgroundColor = .systemGroupedBackground
-        self.view.addSubview(self.postTableView)
-    }
-    
-    private func setNavigationBar() {
-        self.navigationItem.backButtonTitle = "Назад"
-        self.navigationController?.navigationBar.isHidden = true
-    }
-    
-    private func setConstraints() {
-        NSLayoutConstraint.activate(self.tableViewConstraints)
-    }
-    
     private lazy var postTableView: UITableView = {
         let tableView = UITableView()
         if #available(iOS 15.0, *) {
@@ -64,6 +40,30 @@ class ProfileViewController: UIViewController {
         self.postTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
         self.postTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
     ]
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.dataSourcePost = testPostArray
+        self.dataSourcePhoto = Array(testPhotoArray.prefix(4))
+        self.hideKeyboardWhenTappedAround()
+        self.setNavigationBar()
+        self.setupView()
+        self.setConstraints()
+    }
+
+    private func setupView() {
+        self.view.backgroundColor = .systemGroupedBackground
+        self.view.addSubview(self.postTableView)
+    }
+    
+    private func setNavigationBar() {
+        self.navigationItem.backButtonTitle = "Назад"
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
+    private func setConstraints() {
+        NSLayoutConstraint.activate(self.tableViewConstraints)
+    }
 }
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {

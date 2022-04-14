@@ -12,27 +12,6 @@ class ProfileHeader: UITableViewHeaderFooterView {
     private let imageHeight: CGFloat = 100
     private var currentStatus: String?
     private let statusLength = 32
-
-    override init(reuseIdentifier: String?) {
-        super.init(reuseIdentifier: reuseIdentifier)
-        self.setupView()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setupView() {
-        self.contentView.addSubview(self.backView)
-        self.backView.addSubview(self.button)
-        self.backView.addSubview(self.photo)
-        self.backView.addSubview(self.nameLable)
-        self.backView.addSubview(self.statusLable)
-        self.backView.addSubview(self.statusText)
-        self.backView.addSubview(self.statusErrorLable)
-        
-        self.constraintsSet()
-    }
     
     private lazy var backView: UIView = {
         let view = UIView()
@@ -115,7 +94,6 @@ class ProfileHeader: UITableViewHeaderFooterView {
         return textField
     }()
     
-    
     private lazy var backViewConstraints = [
         self.backView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
         self.backView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
@@ -171,7 +149,28 @@ class ProfileHeader: UITableViewHeaderFooterView {
         self.statusErrorLable.bottomAnchor.constraint(equalTo: self.statusText.topAnchor, constant: -2),
         self.statusErrorLable.heightAnchor.constraint(equalToConstant: 10)
     ]
+ 
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        self.setupView()
+    }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupView() {
+        self.contentView.addSubview(self.backView)
+        self.backView.addSubview(self.button)
+        self.backView.addSubview(self.photo)
+        self.backView.addSubview(self.nameLable)
+        self.backView.addSubview(self.statusLable)
+        self.backView.addSubview(self.statusText)
+        self.backView.addSubview(self.statusErrorLable)
+        
+        self.constraintsSet()
+    }
+   
     private func constraintsSet() {
         NSLayoutConstraint.activate(self.constraintsButton)
         NSLayoutConstraint.activate(self.constraintsPhoto)

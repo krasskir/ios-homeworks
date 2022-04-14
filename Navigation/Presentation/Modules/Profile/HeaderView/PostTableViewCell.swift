@@ -124,6 +124,33 @@ class PostTableViewCell: UITableViewCell {
         return lable
     }()
     
+    private lazy var backViewConstraints = [
+        self.backView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+        self.backView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
+        self.backView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
+        self.backView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
+    ]
+    
+    private lazy var titleConstraints = [
+        self.titlePost.leadingAnchor.constraint(equalTo: self.backView.leadingAnchor, constant: 16),
+        self.titlePost.trailingAnchor.constraint(equalTo: self.backView.trailingAnchor, constant: -16),
+        self.titlePost.topAnchor.constraint(equalTo: self.backView.topAnchor, constant: 16)
+    ]
+    
+    private lazy var imageViewConstraints = [
+        self.postImage.topAnchor.constraint(equalTo: self.titlePost.bottomAnchor, constant: 12),
+        self.postImage.centerXAnchor.constraint(equalTo: self.backView.centerXAnchor),
+        self.postImage.heightAnchor.constraint(equalTo: self.backView.widthAnchor),
+        self.postImage.widthAnchor.constraint(equalTo: self.backView.widthAnchor)
+    ]
+
+    private lazy var stackViewConstraints = [
+        self.stackView.topAnchor.constraint(equalTo: self.postImage.bottomAnchor, constant: 16),
+        self.stackView.bottomAnchor.constraint(equalTo: self.backView.bottomAnchor, constant: -16),
+        self.stackView.leadingAnchor.constraint(equalTo: self.backView.leadingAnchor, constant: 16),
+        self.stackView.trailingAnchor.constraint(equalTo: self.backView.trailingAnchor, constant: -16)
+    ]
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.setupView()
@@ -169,34 +196,7 @@ class PostTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate(imageViewConstraints)
         NSLayoutConstraint.activate(stackViewConstraints)
     }
-    
-    private lazy var backViewConstraints = [
-        self.backView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
-        self.backView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
-        self.backView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
-        self.backView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
-    ]
-    
-    private lazy var titleConstraints = [
-        self.titlePost.leadingAnchor.constraint(equalTo: self.backView.leadingAnchor, constant: 16),
-        self.titlePost.trailingAnchor.constraint(equalTo: self.backView.trailingAnchor, constant: -16),
-        self.titlePost.topAnchor.constraint(equalTo: self.backView.topAnchor, constant: 16)
-    ]
-    
-    private lazy var imageViewConstraints = [
-        self.postImage.topAnchor.constraint(equalTo: self.titlePost.bottomAnchor, constant: 12),
-        self.postImage.centerXAnchor.constraint(equalTo: self.backView.centerXAnchor),
-        self.postImage.heightAnchor.constraint(equalTo: self.backView.widthAnchor),
-        self.postImage.widthAnchor.constraint(equalTo: self.backView.widthAnchor)
-    ]
 
-    private lazy var stackViewConstraints = [
-        self.stackView.topAnchor.constraint(equalTo: self.postImage.bottomAnchor, constant: 16),
-        self.stackView.bottomAnchor.constraint(equalTo: self.backView.bottomAnchor, constant: -16),
-        self.stackView.leadingAnchor.constraint(equalTo: self.backView.leadingAnchor, constant: 16),
-        self.stackView.trailingAnchor.constraint(equalTo: self.backView.trailingAnchor, constant: -16)
-    ]
-    
     @objc func likesUp(_ sender: UITapGestureRecognizer){
         self.likesCount.text = self.add(self.likesCount.text)
     }
