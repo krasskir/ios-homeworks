@@ -8,8 +8,13 @@
 import UIKit
 
 class PostTableViewCell: UITableViewCell {
+    
+    weak var delegateButton: CellPushDelegate?
+    
+    private var id: Int = 0
 
     struct PostCell: PostViewCellProtocol {
+        var id: Int
         var title: String
         var author: String
         var image: String
@@ -94,40 +99,30 @@ class PostTableViewCell: UITableViewCell {
         return lable
     }()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.setupView()
-    }
+    private lazy var likesCount: UILabel = {
+        let lable = UILabel()
+        lable.font = .systemFont(ofSize: 16)
+        lable.textColor = .black
+        lable.translatesAutoresizingMaskIntoConstraints = false
+        return lable
+    }()
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    private lazy var viewsCount: UILabel = {
+        let lable = UILabel()
+        lable.font = .systemFont(ofSize: 16)
+        lable.textColor = .black
+        lable.translatesAutoresizingMaskIntoConstraints = false
+        return lable
+    }()
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-    }
-    
-    private func setupView() {
-        self.contentView.backgroundColor = .white
-
-        self.contentView.addSubview(self.backView)
-        self.stackView.addSubview(self.titlePost)
-        self.stackView.addSubview(self.postImage)
-        self.backView.addSubview(self.stackView)
-        self.stackView.addArrangedSubview(self.postText)
-        self.stackView.addArrangedSubview(self.subStackView)
-        self.subStackView.addArrangedSubview(self.likes)
-        self.subStackView.addArrangedSubview(self.views)
-        
-        self.setupConstraints()
-    }
-    
-    private func setupConstraints() {
-        NSLayoutConstraint.activate(backViewConstraints)
-        NSLayoutConstraint.activate(titleConstraints)
-        NSLayoutConstraint.activate(imageViewConstraints)
-        NSLayoutConstraint.activate(stackViewConstraints)
-    }
+    private lazy var spaceLable: UILabel = {
+        let lable = UILabel()
+        lable.font = .systemFont(ofSize: 16)
+        lable.textColor = .black
+        lable.text = "                                      "
+        lable.translatesAutoresizingMaskIntoConstraints = false
+        return lable
+    }()
     
     private lazy var backViewConstraints = [
         self.backView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
@@ -155,16 +150,83 @@ class PostTableViewCell: UITableViewCell {
         self.stackView.leadingAnchor.constraint(equalTo: self.backView.leadingAnchor, constant: 16),
         self.stackView.trailingAnchor.constraint(equalTo: self.backView.trailingAnchor, constant: -16)
     ]
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.setupView()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+    }
+    
+    private func setupView() {
+        self.contentView.backgroundColor = .white
+
+        self.contentView.addSubview(self.backView)
+        self.backView.addSubview(self.titlePost)
+        self.backView.addSubview(self.postImage)
+        self.backView.addSubview(self.stackView)
+        self.stackView.addArrangedSubview(self.postText)
+        self.stackView.addArrangedSubview(self.subStackView)
+        self.subStackView.addArrangedSubview(self.likes)
+        self.subStackView.addArrangedSubview(self.likesCount)
+        self.subStackView.addArrangedSubview(self.spaceLable)
+        self.subStackView.addArrangedSubview(self.views)
+        self.subStackView.addArrangedSubview(self.viewsCount)
+        
+        self.setupConstraints()
+        
+        let likeGesture = UITapGestureRecognizer(target: self, action: #selector(likesUp))
+        self.likes.isUserInteractionEnabled = true
+        self.likes.addGestureRecognizer(likeGesture)
+        
+        let cellGesture = UITapGestureRecognizer(target: self, action: #selector(self.postZooming))
+        self.postImage.isUserInteractionEnabled = true
+        self.postImage.addGestureRecognizer(cellGesture)
+    }
+    
+    private func setupConstraints() {
+        NSLayoutConstraint.activate(backViewConstraints)
+        NSLayoutConstraint.activate(titleConstraints)
+        NSLayoutConstraint.activate(imageViewConstraints)
+        NSLayoutConstraint.activate(stackViewConstraints)
+    }
+
+    @objc func likesUp(_ sender: UITapGestureRecognizer){
+        self.likesCount.text = self.add(self.likesCount.text)
+    }
+    
+    private func add(_ count: String?) -> String {
+        if var countAdd = Int(count ?? "") {
+            countAdd += 1
+            return String(countAdd)
+        } else {
+            return ""
+        }
+    }
+    
+    @objc func postZooming(_ sender: UITapGestureRecognizer){
+        self.viewsCount.text = self.add(self.viewsCount.text)
+        self.delegateButton?.didTapCell(for: self.id)
+    }
 }
 
 extension PostTableViewCell: PostSetupable {
     func setup(with viewModel: PostViewCellProtocol) {
         guard let viewModel = viewModel as? PostCell else { return }
+        self.id = viewModel.id
         self.titlePost.text = viewModel.title
         self.postImage.image = UIImage(named: viewModel.image)
         self.postText.text = viewModel.description
-        self.likes.text = "Likes: " + String(viewModel.likes)
-        self.views.text = "Views: " + String(viewModel.views)
+        self.likes.text = "Likes:"
+        self.likesCount.text = String(viewModel.likes)
+        self.views.text = "Views:"
+        self.viewsCount.text = String(viewModel.views)
         self.author = viewModel.author
     }
 }

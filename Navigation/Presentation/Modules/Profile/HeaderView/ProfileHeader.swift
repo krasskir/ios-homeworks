@@ -12,27 +12,6 @@ class ProfileHeader: UITableViewHeaderFooterView {
     private let imageHeight: CGFloat = 100
     private var currentStatus: String?
     private let statusLength = 32
-
-    override init(reuseIdentifier: String?) {
-        super.init(reuseIdentifier: reuseIdentifier)
-        self.setupView()
-    }
-    
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setupView() {
-        self.contentView.addSubview(self.backView)
-        self.backView.addSubview(self.button)
-        self.backView.addSubview(self.photo)
-        self.backView.addSubview(self.nameLable)
-        self.backView.addSubview(self.statusLable)
-        self.backView.addSubview(self.statusText)
-        
-        self.constraintsSet()
-    }
     
     private lazy var backView: UIView = {
         let view = UIView()
@@ -57,7 +36,7 @@ class ProfileHeader: UITableViewHeaderFooterView {
     private lazy var button: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Изменить статус", for: .normal)
+        button.setTitle("Установить статус", for: .normal)
         button.backgroundColor = .systemBlue
         button.setTitleColor(.white, for: .normal)
         button.clipsToBounds = true
@@ -67,9 +46,9 @@ class ProfileHeader: UITableViewHeaderFooterView {
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOpacity = 0.7
         button.layer.masksToBounds = false
-        button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
-        button.addTarget(self, action: #selector(holdTapButton), for: .touchDown)
-        button.addTarget(self, action: #selector(dragExitButton), for: .touchDragExit)
+        button.addTarget(self, action: #selector(self.didTapButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(self.holdTapButton), for: .touchDown)
+        button.addTarget(self, action: #selector(self.dragExitButton), for: .touchDragExit)
         return button
     }()
     
@@ -110,11 +89,20 @@ class ProfileHeader: UITableViewHeaderFooterView {
         textField.textAlignment = .center
         textField.returnKeyType = UIReturnKeyType.done
         textField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
-        textField.isHidden = true
         textField.delegate = self
         return textField
     }()
     
+    private lazy var statusErrorLable: UILabel = {
+       let lable = UILabel()
+        lable.translatesAutoresizingMaskIntoConstraints = false
+        lable.textColor = .systemRed
+        lable.font = UIFont.systemFont(ofSize: 10.0)
+        lable.text = "Нельзя установить пустой статус"
+        lable.textAlignment = .right
+        lable.isHidden = true
+        return lable
+    }()
     
     private lazy var backViewConstraints = [
         self.backView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
@@ -131,7 +119,7 @@ class ProfileHeader: UITableViewHeaderFooterView {
     ]
     
     private lazy var constraintsButton = [
-        self.button.topAnchor.constraint(equalTo: self.photo.bottomAnchor, constant: 16),
+        self.button.topAnchor.constraint(equalTo: self.photo.bottomAnchor, constant: 50),
         self.button.leadingAnchor.constraint(equalTo: self.backView.leadingAnchor, constant: 16),
         self.button.trailingAnchor.constraint(equalTo: self.backView.trailingAnchor, constant: -16),
         self.button.heightAnchor.constraint(equalToConstant: 50)
@@ -143,7 +131,7 @@ class ProfileHeader: UITableViewHeaderFooterView {
     ]
     
     private lazy var constraintsStatusLable = [
-        self.statusLable.bottomAnchor.constraint(equalTo: self.button.topAnchor, constant: -34),
+        self.statusLable.bottomAnchor.constraint(equalTo: self.button.topAnchor, constant: -68),
         self.statusLable.leadingAnchor.constraint(equalTo: self.photo.trailingAnchor, constant: 16)
     ]
     
@@ -153,47 +141,57 @@ class ProfileHeader: UITableViewHeaderFooterView {
         self.statusText.leadingAnchor.constraint(equalTo: self.photo.trailingAnchor, constant: 16),
         self.statusText.heightAnchor.constraint(equalToConstant: 40)
     ]
+
+    private lazy var statusErrorLableConstraints = [
+        self.statusErrorLable.leadingAnchor.constraint(equalTo: self.backView.leadingAnchor, constant: 26),
+        self.statusErrorLable.trailingAnchor.constraint(equalTo: self.backView.trailingAnchor, constant: -26),
+        self.statusErrorLable.bottomAnchor.constraint(equalTo: self.statusText.topAnchor, constant: -2),
+        self.statusErrorLable.heightAnchor.constraint(equalToConstant: 10)
+    ]
+ 
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        self.setupView()
+    }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupView() {
+        self.contentView.addSubview(self.backView)
+        self.backView.addSubview(self.button)
+        self.backView.addSubview(self.photo)
+        self.backView.addSubview(self.nameLable)
+        self.backView.addSubview(self.statusLable)
+        self.backView.addSubview(self.statusText)
+        self.backView.addSubview(self.statusErrorLable)
+        
+        self.constraintsSet()
+    }
+   
     private func constraintsSet() {
-        NSLayoutConstraint.activate(constraintsButton)
-        NSLayoutConstraint.activate(constraintsPhoto)
-        NSLayoutConstraint.activate(constraintsNameLable)
-        NSLayoutConstraint.activate(constraintsStatusText)
-        NSLayoutConstraint.activate(constraintsStatusLable)
-        NSLayoutConstraint.activate(backViewConstraints)
+        NSLayoutConstraint.activate(self.constraintsButton)
+        NSLayoutConstraint.activate(self.constraintsPhoto)
+        NSLayoutConstraint.activate(self.constraintsNameLable)
+        NSLayoutConstraint.activate(self.constraintsStatusText)
+        NSLayoutConstraint.activate(self.constraintsStatusLable)
+        NSLayoutConstraint.activate(self.backViewConstraints)
+        NSLayoutConstraint.activate(self.statusErrorLableConstraints)
     }
     
     @objc private func didTapButton(sender: UIButton) {
         self.animateTap(sender, 0.85)
-        if statusText.isHidden {
-            didHideTextField()
-        } else {
-            willHideTextField()
-        }
-    }
-    
-    private func didHideTextField() {
-        self.constraintsStatusLable[0].constant = -68
-        self.constraintsButton[0].constant = 50
-        self.button.setTitle("Установить статус", for: .normal)
-        UIView.animate(withDuration: 0.45) {
-            self.layoutIfNeeded()
-        } completion: { _ in
-            self.statusText.isHidden.toggle()
-        }
-    }
-    
-    private func willHideTextField() {
-        self.statusText.isHidden.toggle()
-        self.constraintsButton[0].constant = 16
-        self.constraintsStatusLable[0].constant = -34
-        self.statusLable.text = currentStatus
+        guard self.currentStatus != nil,
+              spaceValidate(string: self.currentStatus!),
+              self.currentStatus != "" else {
+                  self.statusErrorLable.isHidden = false
+                  return
+              }
+        self.statusLable.text = self.currentStatus
         self.statusText.text = ""
         self.currentStatus = nil
-        self.button.setTitle("Изменить статус", for: .normal)
-        UIView.animate(withDuration: 0.45) {
-            self.layoutIfNeeded()
-        }
+        self.statusErrorLable.isHidden = true
     }
     
     @objc private func holdTapButton(sender: UIButton) {

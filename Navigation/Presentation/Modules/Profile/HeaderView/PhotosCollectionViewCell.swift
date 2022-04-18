@@ -10,15 +10,28 @@ import UIKit
 class PhotosCollectionViewCell: UICollectionViewCell {
     
     struct PhotoCollectionCell: PhotoCollectionViewCellPorotocol {
+        var id: Int
         var photo: String
     }
+    
+    weak var cellPushDelegate: CellPushDelegate?
+    
+    private var id: Int = 0
     
     private lazy var image: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
+    
+    private lazy var imageConstraints = [
+        self.image.topAnchor.constraint(equalTo: self.contentView.topAnchor),
+        self.image.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
+        self.image.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+        self.image.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
+    ]
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,25 +44,28 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     
     private func setupView() {
         self.contentView.backgroundColor = .white
-        self.contentView.addSubview(image)
+        self.contentView.addSubview(self.image)
         self.setupConstraints()
+        
+        
+        let cellGesture = UITapGestureRecognizer(target: self, action: #selector(self.postZooming))
+        self.contentView.isUserInteractionEnabled = true
+        self.contentView.addGestureRecognizer(cellGesture)
     }
 
     private func setupConstraints() {
-        NSLayoutConstraint.activate(imageConstraints)
+        NSLayoutConstraint.activate(self.imageConstraints)
     }
 
-    private lazy var imageConstraints = [
-        self.image.topAnchor.constraint(equalTo: self.contentView.topAnchor),
-        self.image.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
-        self.image.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
-        self.image.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
-    ]
+    @objc func postZooming(_ sender: UITapGestureRecognizer){
+        self.cellPushDelegate?.didTapCell(for: self.id)
+    }
 }
 
 extension PhotosCollectionViewCell: PhotoCollectionSetupable {
     func setup(with viewModel: PhotoCollectionViewCellPorotocol) {
         guard let viewModel = viewModel as? PhotoCollectionCell else { return }
         self.image.image = UIImage(named: viewModel.photo)
+        self.id = viewModel.id
     }
 }

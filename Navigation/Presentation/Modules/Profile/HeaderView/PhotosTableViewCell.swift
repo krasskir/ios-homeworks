@@ -94,6 +94,20 @@ class PhotosTableViewCell: UITableViewCell {
         return imageView
     }()
     
+    private lazy var stacksConstraints = [
+        self.stackLable.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 12),
+        self.stackLable.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 12),
+        self.stackLable.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -12),
+        
+        
+        self.stackImage.topAnchor.constraint(equalTo: self.stackLable.bottomAnchor, constant: 12),
+        self.stackImage.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 12),
+        self.stackImage.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -12),
+        self.stackImage.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -12),
+        
+        self.stackImage.heightAnchor.constraint(equalToConstant: stackImageHeight())
+    ]
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.setupView()
@@ -146,23 +160,9 @@ class PhotosTableViewCell: UITableViewCell {
         let dim = (width - (3 * spacing) - 24) / 4
         return dim
     }
-    
-    private lazy var stacksConstraints = [
-        self.stackLable.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 12),
-        self.stackLable.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 12),
-        self.stackLable.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -12),
-        
-        
-        self.stackImage.topAnchor.constraint(equalTo: self.stackLable.bottomAnchor, constant: 12),
-        self.stackImage.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 12),
-        self.stackImage.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -12),
-        self.stackImage.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -12),
-        
-        self.stackImage.heightAnchor.constraint(equalToConstant: stackImageHeight())
-    ]
-    
+
     @objc func moveToPhotos(_ sender: UITapGestureRecognizer){
-        delegateButton?.didTapButton()
+        delegateButton?.didTapButtonEnter()
     }
 }
 

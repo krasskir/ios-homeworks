@@ -9,39 +9,15 @@ import UIKit
 
 class LoginHeaderView: UIView, UITextFieldDelegate {
     
-    weak var delegateButton: ButtonPushDelegate?
+    weak var delegateButtonEnter: ButtonPushDelegate?
+    weak var delegateButtonAlert: ButtonAlertDelegate?
     
+    private let standartLogin: String = "kkrasavin@yarz.ru"
+    private let standertPassword: String = "12345678"
     private var emailText: String?
     private var passwordText: String?
     
     private let colorSet = UIColor(hex: "#4885CC")
-    
-    override init(frame: CGRect) {
-        super.init(frame: .zero)
-        self.setupView()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setupView() {
-        self.backgroundColor = .white
-        
-        self.addSubview(logoView)
-        self.stackTextViews.addArrangedSubview(emailTextField)
-        self.stackTextViews.addArrangedSubview(passwordTextField)
-        self.addSubview(stackTextViews)
-        self.addSubview(button)
-        
-        self.constraintsSet()
-    }
-    
-    private func constraintsSet() {
-        NSLayoutConstraint.activate(logoViewConstraints)
-        NSLayoutConstraint.activate(stackTextViewsConstraints)
-        NSLayoutConstraint.activate(buttonConstraints)
-    }
     
     private lazy var logoView: UIImageView = {
         let logo = UIImage(named: "logo.png")
@@ -131,7 +107,7 @@ class LoginHeaderView: UIView, UITextFieldDelegate {
         button.clipsToBounds = true
         button.layer.cornerRadius = 10.0
         button.layer.masksToBounds = true
-        button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(self.didTapButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -143,31 +119,132 @@ class LoginHeaderView: UIView, UITextFieldDelegate {
         self.button.heightAnchor.constraint(equalToConstant: 50)
     ]
     
+    private lazy var passwordErrorLable: UILabel = {
+       let lable = UILabel()
+        lable.translatesAutoresizingMaskIntoConstraints = false
+        lable.textColor = .systemRed
+        lable.font = UIFont.systemFont(ofSize: 10.0)
+        lable.text = "Пароль должен быть больше 8 символов"
+        lable.isHidden = true
+        return lable
+    }()
+    
+    private lazy var passwordErrorLableConstraints = [
+        self.passwordErrorLable.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+        self.passwordErrorLable.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+        self.passwordErrorLable.topAnchor.constraint(equalTo: self.stackTextViews.bottomAnchor, constant: 2),
+        self.passwordErrorLable.heightAnchor.constraint(equalToConstant: 10)
+    ]
+    
+    private lazy var emailErrorLable: UILabel = {
+       let lable = UILabel()
+        lable.translatesAutoresizingMaskIntoConstraints = false
+        lable.textColor = .systemRed
+        lable.font = UIFont.systemFont(ofSize: 10.0)
+        lable.text = "Некорректный Email"
+        lable.isHidden = true
+        return lable
+    }()
+    
+    private lazy var emailErrorLableConstraints = [
+        self.emailErrorLable.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+        self.emailErrorLable.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+        self.emailErrorLable.topAnchor.constraint(equalTo: self.stackTextViews.bottomAnchor, constant: 2),
+        self.emailErrorLable.heightAnchor.constraint(equalToConstant: 10)
+    ]
+    
+    override init(frame: CGRect) {
+        super.init(frame: .zero)
+        self.setupView()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupView() {
+        self.backgroundColor = .white
+        
+        self.addSubview(self.logoView)
+        self.stackTextViews.addArrangedSubview(self.emailTextField)
+        self.stackTextViews.addArrangedSubview(self.passwordTextField)
+        self.addSubview(self.stackTextViews)
+        self.addSubview(self.button)
+        self.addSubview(self.passwordErrorLable)
+        self.addSubview(self.emailErrorLable)
+        
+        self.constraintsSet()
+    }
+    
+    private func constraintsSet() {
+        NSLayoutConstraint.activate(self.logoViewConstraints)
+        NSLayoutConstraint.activate(self.stackTextViewsConstraints)
+        NSLayoutConstraint.activate(self.buttonConstraints)
+        NSLayoutConstraint.activate(self.passwordErrorLableConstraints)
+        NSLayoutConstraint.activate(self.emailErrorLableConstraints)
+    }
+
     @objc private func didTapButton(sender: UIButton) {
-        guard emailText != nil && passwordText != nil else { return }
-        delegateButton?.didTapButton()
-        clearTextField()
+        self.passwordErrorLable.isHidden = true
+        self.emailErrorLable.isHidden = true
+        
+        guard self.emailText != nil,
+              self.emailText != "" else {
+                  isEmptyTextField(self.emailTextField, 0.35)
+                  return
+              }
+        
+        guard self.passwordText != nil,
+              self.passwordText != "" else {
+                  isEmptyTextField(self.passwordTextField, 0.35)
+                  return
+              }
+        
+        guard emailValidate(for: self.emailText!) else {
+            self.emailErrorLable.isHidden = false
+            return
+        }
+        
+        guard self.isValidated(self.passwordText!) else {
+            self.passwordErrorLable.isHidden = false
+            return
+        }
+        
+        guard self.emailText == self.standartLogin,
+              self.passwordText == self.standertPassword else {
+                  self.delegateButtonAlert?.didTapButtonAlert()
+                  return
+              }
+        
+        self.delegateButtonEnter?.didTapButtonEnter()
+        self.clearTextField()
     }
     
     private func clearTextField() {
-        emailTextField.text = nil
-        passwordTextField.text = nil
-        emailText = nil
-        passwordText = nil
+        self.emailTextField.text = nil
+        self.passwordTextField.text = nil
+        self.emailText = nil
+        self.passwordText = nil
+        self.passwordErrorLable.isHidden = true
+        self.emailErrorLable.isHidden = true
     }
 
     @objc private func emailTextChange(_ textField: UITextField) {
-        if let text = textField.text {
-            self.emailText = text
-        }
+        self.emailText = textField.text
     }
 
     @objc private func passwordTextChange(_ textField: UITextField) {
-        if let text = textField.text {
-            self.passwordText = text
+        self.passwordText = textField.text
+    }
+    
+    private func isValidated(_ password: String) -> Bool {
+        if password.count >= 8 {
+            return true
         }
+        return false
     }
 }
+
 
 
 

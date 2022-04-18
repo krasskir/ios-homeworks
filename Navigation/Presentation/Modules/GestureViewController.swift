@@ -16,37 +16,6 @@ class GestureViewController: UIViewController {
     private var isExpanded: Bool = false
     private var tapGesture = UITapGestureRecognizer()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.setupView()
-        self.setPhotoConstraints()
-        self.constraintsSet()
-        self.setGesture()
-    }
-    
-    private func setupView() {
-        self.view.backgroundColor = .white
-        
-        self.view.addSubview(self.backView)
-        self.view.addSubview(self.photo)
-        self.view.addSubview(self.cancelButton)
-        self.backView.addSubview(self.button)
-        self.backView.addSubview(self.fakePhoto)
-        self.backView.addSubview(self.nameLable)
-        self.backView.addSubview(self.statusLable)
-        self.backView.addSubview(self.statusText)
-        
-        self.view.insertSubview(self.darkView, aboveSubview: self.backView)
-        
-        self.photo.isUserInteractionEnabled = true
-    }
-    
-    private func setGesture() {
-        self.tapGesture.addTarget(self, action: #selector(self.tapGesturePhoto))
-        self.photo.addGestureRecognizer(tapGesture)
-    }
-    
     private lazy var backView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -214,6 +183,36 @@ class GestureViewController: UIViewController {
         self.statusText.heightAnchor.constraint(equalToConstant: 40)
     ]
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.setupView()
+        self.setPhotoConstraints()
+        self.constraintsSet()
+        self.setGesture()
+    }
+    
+    private func setupView() {
+        self.view.backgroundColor = .white
+        
+        self.view.addSubview(self.backView)
+        self.view.addSubview(self.photo)
+        self.view.addSubview(self.cancelButton)
+        self.backView.addSubview(self.button)
+        self.backView.addSubview(self.fakePhoto)
+        self.backView.addSubview(self.nameLable)
+        self.backView.addSubview(self.statusLable)
+        self.backView.addSubview(self.statusText)
+        
+        self.view.insertSubview(self.darkView, aboveSubview: self.backView)
+        
+        self.photo.isUserInteractionEnabled = true
+    }
+    
+    private func setGesture() {
+        self.tapGesture.addTarget(self, action: #selector(self.tapGesturePhoto))
+        self.photo.addGestureRecognizer(tapGesture)
+    }
     
     private func constraintsSet() {
         NSLayoutConstraint.activate(constraintsButton)
@@ -262,12 +261,13 @@ class GestureViewController: UIViewController {
         self.heightPhoto?.constant = avatarLenght
         self.widthPhoto?.constant = avatarLenght
         
+        self.cancelButton.isHidden.toggle()
+        
         UIView.animate(withDuration: 0.5) {
             self.photo.layer.cornerRadius = 100 / 2
             self.view.layoutIfNeeded()
         } completion: { _ in
             self.photo.layer.borderWidth = 3.0
-            self.cancelButton.isHidden.toggle()
             self.isExpanded.toggle()
             
             UIView.animate(withDuration: 0.3) {

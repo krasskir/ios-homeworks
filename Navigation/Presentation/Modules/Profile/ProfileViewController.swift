@@ -9,32 +9,10 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
+    private let cellHeight: CGFloat = 600
+    
     private var dataSourcePost: [Post] = []
     private var dataSourcePhoto: [String] = []
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.dataSourcePost = testPostArray
-        self.dataSourcePhoto = Array(testPhotoArray.prefix(4))
-        self.hideKeyboardWhenTappedAround()
-        self.setNavigationBar()
-        self.setupView()
-        self.setConstraints()
-    }
-    
-    private func setupView() {
-        self.view.backgroundColor = .systemGroupedBackground
-        self.view.addSubview(postTableView)
-    }
-    
-    private func setNavigationBar() {
-        self.navigationItem.backButtonTitle = "Назад"
-        self.navigationController?.navigationBar.isHidden = true
-    }
-    
-    private func setConstraints() {
-        NSLayoutConstraint.activate(tableViewConstraints)
-    }
     
     private lazy var postTableView: UITableView = {
         let tableView = UITableView()
@@ -62,6 +40,30 @@ class ProfileViewController: UIViewController {
         self.postTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
         self.postTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
     ]
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.dataSourcePost = testPostArray
+        self.dataSourcePhoto = Array(testPhotoArray.prefix(4))
+        self.hideKeyboardWhenTappedAround()
+        self.setNavigationBar()
+        self.setupView()
+        self.setConstraints()
+    }
+
+    private func setupView() {
+        self.view.backgroundColor = .systemGroupedBackground
+        self.view.addSubview(self.postTableView)
+    }
+    
+    private func setNavigationBar() {
+        self.navigationItem.backButtonTitle = "Назад"
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
+    private func setConstraints() {
+        NSLayoutConstraint.activate(self.tableViewConstraints)
+    }
 }
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
@@ -93,13 +95,14 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 return cell
             }
             var post = self.dataSourcePost[indexPath.row]
-            let viewModel = PostTableViewCell.PostCell(title: post.title,
+            let viewModel = PostTableViewCell.PostCell(id: indexPath.row, title: post.title,
                                                         author: post.author,
                                                         image: post.image,
                                                         description: post.discription,
                                                         views: post.views,
                                                         likes: post.likes)
             cell.setup(with: viewModel)
+            cell.delegateButton = self
             return cell
         }
     }
@@ -120,11 +123,37 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return section == 0 ? 230 : 10
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
+    -> UISwipeActionsConfiguration? {
+        var configuration: UISwipeActionsConfiguration? = nil
+        if indexPath.section == 1 {
+            let deleteAction = UIContextualAction(style: .normal, title: nil) { (action, view, completion) in
+                completion(true)
+            }
+            self.dataSourcePost.remove(at: indexPath.row)
+            self.postTableView.deleteRows(at: [indexPath], with: .automatic)
+            configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        }
+        return configuration
+    }
 }
 
 extension ProfileViewController: ButtonPushDelegate {
-    func didTapButton() {
+    func didTapButtonEnter() {
         let photos = PhotosViewController()
         self.navigationController?.pushViewController(photos, animated: true)
+    }
+}
+
+extension ProfileViewController: CellPushDelegate {
+    func didTapCell(for id: Int) {
+        let height = self.cellHeight
+        let view = (self.postTableView.cellForRow(at: IndexPath(row: id, section: 1)) as? PostTableViewCell)?.contentView.snapshotView(afterScreenUpdates: true)
+        let post = ZoomViewController()
+        if view != nil {
+            post.setupView(for: view!, with: height)
+            self.present(post, animated: true, completion: nil)
+        }
     }
 }

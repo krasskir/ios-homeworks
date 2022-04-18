@@ -9,7 +9,7 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
-    var firstPost: Post = Post(title: "Перый пост", author: "Kirill", discription: "Блаблабла", image: "cat.jpg")
+    var firstPost: Post = Post(id: 0, title: "Перый пост", author: "Kirill", discription: "Блаблабла", image: "cat.jpg")
     
     private lazy var button: UIButton = {
         let button = UIButton()
@@ -19,7 +19,7 @@ class FeedViewController: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.clipsToBounds = true
         button.layer.cornerRadius = 12
-        button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(self.didTapButton), for: .touchUpInside)
         return button
     }()
 
