@@ -36,7 +36,7 @@ class ProfileHeader: UITableViewHeaderFooterView {
     private lazy var button: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Изменить статус", for: .normal)
+        button.setTitle("Установить статус", for: .normal)
         button.backgroundColor = .systemBlue
         button.setTitleColor(.white, for: .normal)
         button.clipsToBounds = true
@@ -89,9 +89,19 @@ class ProfileHeader: UITableViewHeaderFooterView {
         textField.textAlignment = .center
         textField.returnKeyType = UIReturnKeyType.done
         textField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
-        textField.isHidden = true
         textField.delegate = self
         return textField
+    }()
+    
+    private lazy var statusErrorLable: UILabel = {
+       let lable = UILabel()
+        lable.translatesAutoresizingMaskIntoConstraints = false
+        lable.textColor = .systemRed
+        lable.font = UIFont.systemFont(ofSize: 10.0)
+        lable.text = "Нельзя установить пустой статус"
+        lable.textAlignment = .right
+        lable.isHidden = true
+        return lable
     }()
     
     private lazy var backViewConstraints = [
@@ -109,7 +119,7 @@ class ProfileHeader: UITableViewHeaderFooterView {
     ]
     
     private lazy var constraintsButton = [
-        self.button.topAnchor.constraint(equalTo: self.photo.bottomAnchor, constant: 16),
+        self.button.topAnchor.constraint(equalTo: self.photo.bottomAnchor, constant: 50),
         self.button.leadingAnchor.constraint(equalTo: self.backView.leadingAnchor, constant: 16),
         self.button.trailingAnchor.constraint(equalTo: self.backView.trailingAnchor, constant: -16),
         self.button.heightAnchor.constraint(equalToConstant: 50)
@@ -121,7 +131,7 @@ class ProfileHeader: UITableViewHeaderFooterView {
     ]
     
     private lazy var constraintsStatusLable = [
-        self.statusLable.bottomAnchor.constraint(equalTo: self.button.topAnchor, constant: -34),
+        self.statusLable.bottomAnchor.constraint(equalTo: self.button.topAnchor, constant: -68),
         self.statusLable.leadingAnchor.constraint(equalTo: self.photo.trailingAnchor, constant: 16)
     ]
     
@@ -131,18 +141,7 @@ class ProfileHeader: UITableViewHeaderFooterView {
         self.statusText.leadingAnchor.constraint(equalTo: self.photo.trailingAnchor, constant: 16),
         self.statusText.heightAnchor.constraint(equalToConstant: 40)
     ]
-    
-    private lazy var statusErrorLable: UILabel = {
-       let lable = UILabel()
-        lable.translatesAutoresizingMaskIntoConstraints = false
-        lable.textColor = .systemRed
-        lable.font = UIFont.systemFont(ofSize: 10.0)
-        lable.text = "Нельзя установить пустой статус"
-        lable.textAlignment = .right
-        lable.isHidden = true
-        return lable
-    }()
-    
+
     private lazy var statusErrorLableConstraints = [
         self.statusErrorLable.leadingAnchor.constraint(equalTo: self.backView.leadingAnchor, constant: 26),
         self.statusErrorLable.trailingAnchor.constraint(equalTo: self.backView.trailingAnchor, constant: -26),
@@ -183,44 +182,16 @@ class ProfileHeader: UITableViewHeaderFooterView {
     
     @objc private func didTapButton(sender: UIButton) {
         self.animateTap(sender, 0.85)
-        if statusText.isHidden {
-            self.didHideTextField()
-        } else {
-            self.willHideTextField()
-        }
-    }
-    
-    private func didHideTextField() {
-        self.constraintsStatusLable[0].constant = -68
-        self.constraintsButton[0].constant = 50
-        self.button.setTitle("Установить статус", for: .normal)
-        UIView.animate(withDuration: 0.45) {
-            self.layoutIfNeeded()
-        } completion: { _ in
-            self.statusText.isHidden.toggle()
-        }
-    }
-    
-    private func willHideTextField() {
         guard self.currentStatus != nil,
               spaceValidate(string: self.currentStatus!),
               self.currentStatus != "" else {
                   self.statusErrorLable.isHidden = false
-                  isEmptyTextField(self.statusText, 0.35)
                   return
               }
-        
-        self.statusText.isHidden.toggle()
-        self.constraintsButton[0].constant = 16
-        self.constraintsStatusLable[0].constant = -34
         self.statusLable.text = self.currentStatus
         self.statusText.text = ""
         self.currentStatus = nil
         self.statusErrorLable.isHidden = true
-        self.button.setTitle("Изменить статус", for: .normal)
-        UIView.animate(withDuration: 0.45) {
-            self.layoutIfNeeded()
-        }
     }
     
     @objc private func holdTapButton(sender: UIButton) {
